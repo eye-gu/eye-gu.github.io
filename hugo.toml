@@ -441,7 +441,7 @@ enableEmoji = true
 
   # FixIt 0.2.18 | NEW Breadcrumb config
   [params.breadcrumb]
-    enable = false
+    enable = true
     sticky = false
     showHome = false
     # FixIt 0.3.13 | NEW
@@ -903,7 +903,7 @@ enableEmoji = true
     # FixIt 0.2.17 | NEW whether to enable wordCount
     wordCount = true
     # FixIt 0.2.17 | NEW whether to enable readingTime
-    readingTime = true
+    readingTime = false
     # FixIt 0.2.17 | NEW end of post flag
     endFlag = ""
     # FixIt 0.2.18 | NEW whether to enable instant.page
@@ -928,7 +928,7 @@ enableEmoji = true
       # FixIt 0.2.13 | NEW position of TOC ["left", "right"]
       position = "right"
       # FixIt 0.3.12 | NEW supersede `markup.tableOfContents` settings
-      ordered = false
+      ordered = true
       startLevel = 2
       endLevel = 6
     # FixIt 0.2.13 | NEW Display a message at the beginning of an article to warn the reader that its content might be expired
@@ -947,7 +947,7 @@ enableEmoji = true
       # FixIt 0.3.12 | CHANGED must set `params.page.toc.ordered` to true
       [params.page.heading.number]
         # whether to enable auto heading numbering
-        enable = false
+        enable = true
         # FixIt 0.3.3 | NEW only enable in main section pages (default is posts)
         onlyMainSection = true
         [params.page.heading.number.format]
