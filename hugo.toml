@@ -901,7 +901,7 @@ enableEmoji = true
     # If true, save the reading progress when closing the page.
     autoBookmark = false
     # FixIt 0.2.17 | NEW whether to enable wordCount
-    wordCount = true
+    wordCount = false
     # FixIt 0.2.17 | NEW whether to enable readingTime
     readingTime = false
     # FixIt 0.2.17 | NEW end of post flag
@@ -1021,7 +1021,7 @@ enableEmoji = true
         # bitcoin = "/images/bitcoin.png"
     # social share links in post page
     [params.page.share]
-      enable = true
+      enable = false
       Twitter = true
       Facebook = true
       Linkedin = false
