@@ -38,6 +38,8 @@ repost:
 
 
 
+[doc](https://nightlies.apache.org/flink/flink-cdc-docs-master/zh/docs/get-started/quickstart/mysql-to-starrocks/)
+
 ```yaml
 source:
   type: mysql
