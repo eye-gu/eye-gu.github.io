@@ -45,6 +45,7 @@ docker run -d --name mysql \
     -e MYSQL_ROOT_PASSWORD=123456 \
     -e TZ=Asia/Shanghai \
     -v /Users/guzemin/docker/mysql/data:/bitnami/mysql/data \
+    -v /Users/guzemin/docker/mysql/my.cnf:/opt/bitnami/mysql/conf/my.cnf \
     -p 3306:3306 \
     bitnami/mysql:8.2.0
 ```
