@@ -3,7 +3,7 @@ title: Nacos
 subtitle:
 date: 2024-11-27T14:34:04+08:00
 slug: c29d3a8
-draft: true
+draft: false
 author:
   name:
   link:
@@ -14,10 +14,6 @@ keywords:
 license:
 comment: false
 weight: 0
-tags:
-  - draft
-categories:
-  - draft
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRelated: false
