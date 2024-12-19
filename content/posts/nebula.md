@@ -88,21 +88,16 @@ CREATE SPACE `test` (partition_num = 10, vid_type = FIXED_STRING(10))
 
 
 ```cypher
-CREATE tag `s_category` (categoryId int64 NOT NULL)  ;
 CREATE tag `s_object` (`name` string NOT NULL) ;
 CREATE tag `s_subject` (`productId` int64 NOT NULL, `categoryId` int64 NOT NULL, `name` string NOT NULL) ;
 
 CREATE edge `used` ();
-CREATE edge `suitable` () ;
-CREATE edge `contain` () ;
-                                          
+CREATE edge `is_a` () ;
 ```
 
 ```mermaid
 classDiagram
-		class s_category {
-			int categoryId
-		}
+		direction LR
 		class s_subject {
 			int productId
 			int categoryId
@@ -111,27 +106,14 @@ classDiagram
 		class s_object {
 			string name
 		}
-    s_category --> s_subject : contain
     s_subject --> s_object: used
-    s_subject --> s_object: suitable
-
-
+    s_subject --> s_object: is_a
 ```
 
 ```cypher
 insert vertex `s_subject`(productId, categoryId, name) values "1000000001":(1000000001, 2000000001, "project1");
 insert vertex `s_subject`(productId, categoryId, name) values "1000000002":(1000000002, 2000000001, "project2");
 insert vertex `s_subject`(productId, categoryId, name) values "1000000003":(1000000003, 2000000002, "project3");
-insert vertex `s_subject`(productId, categoryId, name) values "1000000004":(1000000004, 2000000002, "project4");
-
-insert vertex `s_category`(categoryId) values "2000000001":(2000000001);
-insert vertex `s_category`(categoryId) values "2000000002":(2000000002);
-
-
-INSERT EDGE contain() VALUES "2000000001"->"1000000001":();
-INSERT EDGE contain() VALUES "2000000001"->"1000000002":();
-INSERT EDGE contain() VALUES "2000000002"->"1000000003":();
-INSERT EDGE contain() VALUES "2000000002"->"1000000004":();
 
 
 insert vertex `s_object`(name) values "3000000001":("feature1");
@@ -139,33 +121,25 @@ insert vertex `s_object`(name) values "3000000002":("feature2");
 
 
 INSERT EDGE used() VALUES "1000000001"->"3000000001":();
-INSERT EDGE suitable() VALUES "1000000001"->"3000000002":();
+INSERT EDGE is_a() VALUES "1000000001"->"3000000002":();
 INSERT EDGE used() VALUES "1000000002"->"3000000001":();
-INSERT EDGE used() VALUES "1000000004"->"3000000002":();
-INSERT EDGE suitable() VALUES "1000000003"->"3000000002":();
+INSERT EDGE used() VALUES "1000000003"->"3000000002":();
 ```
 
 ```mermaid
 classDiagram
 		direction LR
-    s_category_2000000001 --> s_subject_1000000001 : contain
-    s_category_2000000001 --> s_subject_1000000002 : contain
-    s_category_2000000002 --> s_subject_1000000003 : contain
-    s_category_2000000002 --> s_subject_1000000004 : contain
     s_subject_1000000001 --> s_object_3000000001 : used
-    s_subject_1000000001 --> s_object_3000000002 : suitable
+    s_subject_1000000001 --> s_object_3000000002 : is_a
     s_subject_1000000002 --> s_object_3000000001 : used
-    s_subject_1000000004 --> s_object_3000000002 : used
-    s_subject_1000000003 --> s_object_3000000002 : suitable
-
-
+    s_subject_1000000003 --> s_object_3000000002 : used
 ```
 
-查询和1000000001节点指向相同s_object的s_subject, 且指向的边类型相同. 1000000004虽然和1000000001同样指向3000000002, 但是边类型不同, 因此不被选中.
+查询和1000000001节点指向相同s_object的s_subject, 且指向的边类型相同.
 
 ```cypher
 GO FROM "1000000001" OVER * YIELD type(edge) AS edgeType, dst(edge) AS objectId |
-GO FROM $-.objectId OVER * REVERSELY WHERE type(edge) == $-.edgeType YIELD DISTINCT src(edge) AS subjectId | limit 0,50
+GO FROM $-.objectId OVER * REVERSELY WHERE type(edge) == $-.edgeType YIELD DISTINCT $$.s_subject.productId AS productId | limit 0,50
 
 
 
@@ -174,12 +148,12 @@ WHERE id(a) in [ "1000000001"]
 with type(e) AS edgeType, id(o) AS objectId
 MATCH (s)-[e2]->(o2) 
 WHERE type(e2) == edgeType AND id(o2) == objectId
-RETURN DISTINCT id(s) limit 50
+RETURN DISTINCT s.s_subject.productId limit 50
 
 
-# 1000000001这个节点不会被查出来
+# in的节点不会被查出来
 MATCH (a)-[e]->()<-[e2]-(b)
 WHERE id(a) in [ "1000000001"] and type(e) == type(e2)
-RETURN DISTINCT id(b) limit 50
+RETURN DISTINCT b.s_subject.productId limit 50
 ```
 
