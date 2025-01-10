@@ -40,22 +40,6 @@ repost:
 
 ## docker部署
 
-貌似有点问题，还没有解决
-
-```shell
-docker run -d --name kafka \
-    -e TZ=Asia/Shanghai \
-    -e KAFKA_CFG_NODE_ID=0 \
-    -e KAFKA_CFG_PROCESS_ROLES=controller,broker \
-    -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
-    -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
-    -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@localhost:9093 \
-    -e KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER \
-    -v /Users/guzemin/docker/kafka/data:/bitnami/kafka \
-    -p 9092:9092 \
-    bitnami/kafka:3.7
-```
-
 ```shell
 docker run -d  \
   --name kafka \
@@ -75,6 +59,22 @@ docker run -d  \
   apache/kafka:3.8.0
 ```
 
+bitnami的貌似有点问题，还没有解决
+
+```shell
+docker run -d --name kafka \
+    -e TZ=Asia/Shanghai \
+    -e KAFKA_CFG_NODE_ID=0 \
+    -e KAFKA_CFG_PROCESS_ROLES=controller,broker \
+    -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
+    -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
+    -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@localhost:9093 \
+    -e KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER \
+    -v /Users/guzemin/docker/kafka/data:/bitnami/kafka \
+    -p 9092:9092 \
+    bitnami/kafka:3.7
+```
+
 ## 本地部署
 
 ```shell
@@ -88,12 +88,6 @@ bin/kafka-storage.sh format -t $KAFKA_CLUSTER_ID -c config/kraft/server.properti
 bin/kafka-storage.sh format -t Ol32dbtpRTKtUJX2KKpRHQ -c config/kraft/server.properties
 
 bin/kafka-server-start.sh config/kraft/server.properties
-
-
-## efak
-JMX_PORT=9999 ./bin/kafka-server-start.sh ./config/server.properties
-./bin/ke.sh start
-./bin/ke.sh stop
 ```
 
 ```shell
@@ -101,3 +95,23 @@ JMX_PORT=9999 ./bin/kafka-server-start.sh ./config/server.properties
 
 ./kafka-configs.sh --describe --bootstrap-server 192.168.0.232:9092 --entity-type topics  --entity-name error_log
 ```
+
+## efak
+
+```shell
+export KE_HOME=/Users/guzemin/kafka/efak-web-3.0.1
+
+JMX_PORT=9999 ./bin/kafka-server-start.sh ./config/server.properties
+
+./bin/ke.sh start
+./bin/ke.sh stop
+```
+
+
+
+## kafka-ui
+
+```shell
+docker run -it -p 8080:8080 -d --name kafka-ui -e DYNAMIC_CONFIG_ENABLED=true provectuslabs/kafka-ui:v0.7.2
+```
+
