@@ -60,7 +60,25 @@ docker exec rabbitmq rabbitmq-plugins enable rabbitmq_stream
 
 ## 交换机
 
-direct/ fanout/topic
+### direct
+
+根据routeKey完全匹配
+
+
+
+### topic
+
+routeKey是a.b.c的模式, 其中*可以匹配一个单词, #匹配多个单词
+
+匹配时根据*和#类似模糊匹配
+
+
+
+### fanout
+
+广播
+
+
 
 
 
