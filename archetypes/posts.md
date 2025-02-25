@@ -3,7 +3,7 @@ title: {{ replace .TranslationBaseName "-" " " | title }}
 subtitle:
 date: {{ .Date }}
 slug: {{ substr .File.UniqueID 0 7 }}
-draft: true
+draft: false
 author:
   name:
   link:
@@ -15,9 +15,9 @@ license:
 comment: false
 weight: 0
 tags:
-  - draft
+  -
 categories:
-  - draft
+  -
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRelated: false
