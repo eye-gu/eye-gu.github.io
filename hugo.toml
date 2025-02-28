@@ -148,7 +148,7 @@ enableEmoji = true
     ########## necessary configurations ##########
     # https://github.com/hugo-fixit/FixIt/issues/43
     codeFences = true
-    lineNos = true
+    lineNos = false
     lineNumbersInTable = true
     noClasses = false
     ########## necessary configurations ##########
@@ -508,7 +508,7 @@ enableEmoji = true
       # The number of posts to include in the feed. If set to -1, all posts.
       limit = -1
       # whether to show the full text content in feed.
-      fullText = false
+      fullText = true
 
   # Term list (category or tag) page config
   [params.list]
@@ -521,7 +521,7 @@ enableEmoji = true
       # The number of posts to include in the feed. If set to -1, all posts.
       limit = -1
       # whether to show the full text content in feed.
-      fullText = false
+      fullText = true
 
   # FixIt 0.3.13 | NEW recently updated pages config for archives, section and term list
   [params.recentlyUpdated]
@@ -831,7 +831,7 @@ enableEmoji = true
   # FixIt 0.3.10 | NEW Global Feed config for RSS, Atom and JSON feed.
   [params.feed]
     # The number of posts to include in the feed. If set to -1, all posts.
-    limit = 10
+    limit = -1
     # whether to show the full text content in feed.
     fullText = true
     # Site Challenge for Follow: https://follow.is/
