@@ -125,6 +125,16 @@ advanced settings -> search everywhere -> show endpoints tab for projects
 
 advanced settings -> version control -> use modal commit interface for git and mercurial
 
+### import
+
+Editor > Code Style > Java > Scheme Default > Imports
+
+Class count to use import with
+
+Names count to use [static](https://so.csdn.net/so/search?q=static&spm=1001.2101.3001.7020) import with
+
+将这两个数字改大, 防止import *
+
 
 
 ## 右键专业助手
@@ -181,3 +191,11 @@ jabba
 ## termius
 
 [Termius PRO 最新学习版-CSDN博客](https://blog.csdn.net/weixin_70488292/article/details/143803402)
+
+
+
+## vscode
+
+window.restoreWindows 重新打开上次的窗口
+
+files.readonlyInclude 配置只读文件夹
