@@ -141,7 +141,7 @@ Names count to use [static](https://so.csdn.net/so/search?q=static&spm=1001.2101
 
 
 
-## clipboard
+## clipboard/Paste bot
 
 <https://github.com/Clipy/Clipy>
 
@@ -199,3 +199,16 @@ jabba
 window.restoreWindows 重新打开上次的窗口
 
 files.readonlyInclude 配置只读文件夹
+
+
+
+## git
+
+```shell
+# Windows
+git config --global core.autocrlf input
+
+# mac
+git config --global core.autocrlf true
+```
+
