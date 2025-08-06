@@ -58,6 +58,8 @@ zsh-syntax-highlighting
 
 sdkman
 
+鼠标在vim中可以滚动向下: Scroll wheel sends arrow keys when in alternate screen mode
+
 ## sublime
 
 ### 默认打开新tab
