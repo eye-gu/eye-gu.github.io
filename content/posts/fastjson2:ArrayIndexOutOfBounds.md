@@ -1,0 +1,125 @@
+---
+title: Fastjson2:ArrayIndexOutOfBounds
+subtitle:
+date: 2025-08-14T16:11:40+08:00
+slug: 83341cb
+draft: false
+author:
+  name:
+  link:
+  email:
+  avatar:
+description:
+keywords:
+license:
+comment: false
+weight: 0
+tags:
+  -
+categories:
+  -
+hiddenFromHomePage: false
+hiddenFromSearch: false
+hiddenFromRelated: false
+hiddenFromFeed: false
+summary:
+resources:
+  - name: featured-image
+    src: featured-image.jpg
+  - name: featured-image-preview
+    src: featured-image-preview.jpg
+toc: true
+math: false
+lightgallery: false
+password:
+message:
+repost:
+  enable: false
+  url:
+
+# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
+---
+
+
+
+## 背景
+
+有个线上报错, 查看日志后, 找到以下异常堆栈
+
+![](/fastjson2/stack.png)
+
+![](/fastjson2/code.png)
+
+对照着代码, 发现是fastjson2序列化的报错, 后面找到一个issue: https://github.com/alibaba/fastjson2/issues/1720, 就升级了fastjson2的版本, 重新发了后, 经测试验证没有问题.
+
+
+
+## 复现
+
+一开始自己写了一个对象, 进行序列化测试. 尝试了半天, 怎么都无法复现, debug一下, 发现连fastjson2报错的代码那个方法都没进去. 再详细看堆栈信息, 其中有两行对应于报错的类, 应该是asm生成的代码. 无奈只能查看fastjson2的源码
+
+![](/fastjson2/stack2.png)
+
+找到了`JSONCompiledAnnotationProcessor#genWriteFieldName`方法:
+
+![](/fastjson2/genWriteFieldName.png)
+
+根据属性名称的长度, 生成对应的代码. 因此, 只有在属性长度为8个字符的时候, 才会调用该方法, 那没办法, 索性使用一模一样的对象进行复现.
+
+试了一下后终于复现出一个差不多的, 虽然不是8192!
+
+```java
+public static void main(String[] args) {
+    CourseAndCourseTimeDTO courseAndCourseTimeDTO = new CourseAndCourseTimeDTO();
+    courseAndCourseTimeDTO.setCourseTimeDTOList(new ArrayList<>());
+    courseAndCourseTimeDTO.setCourseTimeId("1");
+
+    for (int i = 0; i < 302; i++) {
+        System.out.println(i);
+        CourseTimeDTO courseTimeDTO = new CourseTimeDTO();
+        courseTimeDTO.setBookVersion("aaaaaaa");
+        courseTimeDTO.setCourseId((long) i);
+        courseAndCourseTimeDTO.getCourseTimeDTOList().add(courseTimeDTO);
+        System.out.println(JSON.toJSONString(courseAndCourseTimeDTO));
+    }
+}
+```
+
+![](/fastjson2/stack3.png)
+
+## 分析
+
+最后查看代码分析原因`com.alibaba.fastjson2.JSONWriterUTF16#writeName8Raw`(2.0.48版本):
+
+![](/fastjson2/writeName8Raw.png)
+
+在扩容的时候, 判断当前加10+indent是否够, 不够进行扩容
+
+其中indent看起来是pretty, 即格式化的json(换行缩进等)才会用到, 正常是0. 那么等于说就看是否能够放得下10个字节, 放不下才会扩容.
+
+但是看下面的代码, 两个引号, 一个逗号, 一个冒号, 8字节的属性名, 最大可能是12个字节, 显然在特殊的边界条件下就出现了数组越界的问题. 因此这是一个偶现的bug.
+
+最后查看最新版本的代码(2.0.58):
+
+![](/fastjson2/writeName8Raw2.png)
+
+保证了最起码有13个字节.
+
+算一下, 一个逗号, 一个引号, 8个字节的属性名, 2个字节的引号和冒号, 还有pretty的一个换行, 总共是13个字节. https://github.com/alibaba/fastjson2/issues/3687
+
+~~但是最后是一个putInt方法, 因此实际需要15个字节, 那不是还会有问题么? 不过`sun.misc.Unsafe#putInt(java.lang.Object, long, int)`方法可以支持这种情况, 等于包掉了, 测试如下:~~
+
+
+
+## 总结
+
+光这次查看fastjson2代码, 就发现了好多奇技淫巧:
+
+1. asm代码生成
+2. 各种长度的属性名不同处理, 像8个字符的转成long一次put
+3. 引号和冒号合并成一起通过putInt一次复制
+4. unsafe的使用
+
+怪不得各种宣传自己快, 为了一点复制时间恐怕当初作者也是绞尽脑汁了吧. 不过这也是一体两面的, 源码里虽然有大量的测试用例, 但总是很难覆盖到各种边界条件, 所以才会有各种bug.
+
+对使用方而言, 或许可以包装一个json工具类进行使用, 第一是方便切换, 第二也是可以统一加catch, 像这次, 可以在catch里面通过tostring打印, 那么后面复现的时候就方便多了, 不会浪费很多时间.
