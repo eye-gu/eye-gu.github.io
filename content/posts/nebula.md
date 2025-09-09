@@ -75,11 +75,11 @@ studia:
   restart: on-failure
 ```
 
-注意studia连接的时候ip需要填graphd, 或者host.docker.internal
+注意studia连接填ip的时候需要填graphd, 或者host.docker.internal
 
 
 
-## 查询
+## Bug
 
 ```cypher
 CREATE SPACE `test` (partition_num = 10, vid_type = FIXED_STRING(10)) 
