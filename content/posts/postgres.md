@@ -41,10 +41,10 @@ repost:
 ---
 
 ```shell
-docker run -d --name postgresql \
+podman run -d --name postgresql \
     -e POSTGRESQL_PASSWORD=123456 \
     -e TZ=Asia/Shanghai \
-    -v /Users/guzemin/docker/postgres/data:/bitnami/postgresql \
+    -v /Users/guzemin/docker/postgres/data:/bitnami/postgresql:U \
     -p 5432:5432 \
     bitnami/postgresql:17.5.0
 ```

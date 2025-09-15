@@ -41,11 +41,11 @@ repost:
 ---
 
 ```shell
-docker run -d \
+podman run -d \
   --name oracle-db \
   -p 1521:1521 \
   -e ORACLE_PWD=123456 \
-  -v /Users/guzemin/docker/oracle/data:/opt/oracle/oradata \
+  -v /Users/guzemin/docker/oracle/data:/opt/oracle/oradata:U \
   container-registry.oracle.com/database/free:23.9.0.0-lite-arm64
 ```
 

@@ -41,8 +41,8 @@ repost:
 ---
 
 ```shell
-docker run -d --name zookeeper \
-		-v /Users/guzemin/docker/zookeeper/data:/bitnami/zookeeper \
+podman run -d --name zookeeper \
+		-v /Users/guzemin/docker/zookeeper/data:/bitnami/zookeeper:U \
 		-p 2181:2181 \
 		-e ALLOW_ANONYMOUS_LOGIN=yes \
     bitnami/zookeeper:3.9.3
