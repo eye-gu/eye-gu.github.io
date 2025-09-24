@@ -43,6 +43,6 @@ repost:
 
 
 ```shell
-podman run -p 2882:2881 --name obstandalone -e MODE=MINI -e OB_TENANT_PASSWORD=12345678 -d quay.io/oceanbase/oceanbase-ce:4.3.5-lts
+podman run -p 2881:2881 --name obstandalone -e MODE=MINI -e OB_TENANT_PASSWORD=12345678 -d quay.io/oceanbase/oceanbase-ce:4.3.5-lts
 ```
 
