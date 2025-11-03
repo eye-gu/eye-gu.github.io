@@ -43,11 +43,11 @@ repost:
 
 
 ```shell
-docker run -d --name neo4j \
-    -e NEO4J_PASSWORD=12345678 \
-    -v /Users/guzemin/docker/neo4j/data:/bitnami \
+podman run -d --name neo4j \
+		-e NEO4J_AUTH=neo4j/12345678 \
+    -v /Users/guzemin/docker/neo4j/data:/data:U \
     -p 7474:7474 \
     -p 7687:7687 \
-    bitnami/neo4j:5.26.10
+    neo4j:5.26.15-community-bullseye
 ```
 
