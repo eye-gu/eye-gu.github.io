@@ -54,3 +54,26 @@ enmotech/opengauss-lite:5.0.3
 
 
 使用opengauss/opengauss:7.0.0-RC2.B015或者opengauss/opengauss-server:7.0.0-RC2.B015的时候报错: Failed to parse cgroup config file. 需要修改cgroup配置. 改成opengauss-lite可以, 但是没有新版本的.
+
+
+
+## navicat连接
+
+| 选项       | 值       |
+| ---------- | -------- |
+| 初始数据库 | postgres |
+| 用户名     | gaussdb  |
+
+
+
+## jdbc连接
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:opengauss://localhost:2881/shenyu
+    username: gaussdb
+    password: Opengauss@123
+    driver-class-name: org.opengauss.Driver
+```
+

@@ -53,3 +53,6 @@ podman run -p 2881:2881 \
   -d quay.io/oceanbase/oceanbase-ce:4.3.5-lts
 ```
 
+## navicat连接
+
+密码为空

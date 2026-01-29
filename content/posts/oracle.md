@@ -49,3 +49,25 @@ podman run -d \
   container-registry.oracle.com/database/free:23.9.0.0-lite-arm64
 ```
 
+
+
+## navicat连接
+
+| 选项     | 值       |
+| -------- | -------- |
+| 连接类型 | 基本     |
+| 服务名称 | FREEPDB1 |
+| 用户名   | SYSTEM   |
+| 角色     | 默认     |
+
+## jdbc连接
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/FREEPDB1
+    username: SYSTEM
+    password: 123456
+    driver-class-name: oracle.jdbc.OracleDriver
+```
+
