@@ -211,6 +211,6 @@ files.readonlyInclude 配置只读文件夹
 git config --global core.autocrlf input
 
 # mac
-git config --global core.autocrlf true
+git config --global core.autocrlf false
 ```
 
