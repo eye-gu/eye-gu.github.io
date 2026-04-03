@@ -48,14 +48,14 @@ repost:
 
 ```shell
 # standalone模式
-go test ./test/integration/standalone/query/etcd... -v --ginkgo.focus="TopN Tests"
-go test ./test/integration/standalone/query_ondisk/etcd/... -v --ginkgo.focus="TopN Tests"
-go test ./test/integration/standalone/multi_segments/etcd... -v --ginkgo.focus="TopN Tests"
-go test ./test/integration/standalone/cold_query/etcd... -v --ginkgo.focus="TopN Tests"
+go test -a ./test/integration/standalone/query/etcd... -v --ginkgo.focus="TopN Tests"
+go test -a ./test/integration/standalone/query_ondisk/etcd/... -v --ginkgo.focus="TopN Tests"
+go test -a ./test/integration/standalone/multi_segments/etcd... -v --ginkgo.focus="TopN Tests"
+go test -a ./test/integration/standalone/cold_query/etcd... -v --ginkgo.focus="TopN Tests"
 
 # distributed模式
-go test ./test/integration/distributed/query/etcd... -v --ginkgo.focus="TopN Tests"
-go test ./test/integration/distributed/multi_segments/etcd... -v --ginkgo.focus="TopN Tests"
+go test -a ./test/integration/distributed/query/etcd... -v --ginkgo.focus="TopN Tests"
+go test -a ./test/integration/distributed/multi_segments/etcd... -v --ginkgo.focus="TopN Tests"
 ```
 
 
