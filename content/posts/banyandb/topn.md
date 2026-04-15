@@ -40,23 +40,26 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-<!--more-->
-
 
 
 ## 查询测试
 
 ```shell
 # standalone模式
-go test -a ./test/integration/standalone/query/etcd... -v --ginkgo.focus="TopN Tests"
-go test -a ./test/integration/standalone/query_ondisk/etcd/... -v --ginkgo.focus="TopN Tests"
-go test -a ./test/integration/standalone/multi_segments/etcd... -v --ginkgo.focus="TopN Tests"
-go test -a ./test/integration/standalone/cold_query/etcd... -v --ginkgo.focus="TopN Tests"
+go test -a ./test/integration/standalone/query... -v --ginkgo.focus="TopN Tests"
+go test -a ./test/integration/standalone/multi_segments... -v --ginkgo.focus="TopN Tests"
 
 # distributed模式
-go test -a ./test/integration/distributed/query/etcd... -v --ginkgo.focus="TopN Tests"
-go test -a ./test/integration/distributed/multi_segments/etcd... -v --ginkgo.focus="TopN Tests"
+go test -a ./test/integration/distributed/query... -v --ginkgo.focus="TopN Tests"
+go test -a ./test/integration/distributed/multi_segments... -v --ginkgo.focus="TopN Tests"
 ```
 
 
+
+## 数据分布
+
+```go
+shard_id = hash(sharding_key) % shard_num
+node = (shard_id + replica_id) % node_count
+```
 

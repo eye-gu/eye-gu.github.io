@@ -108,6 +108,10 @@ SonarLint
 
 arthas
 
+arthas idea
+
+Spring Debugger
+
 jrebel :[【后端】JRebel 2024.1.2本地激活（适用于Windows & macOS） - 双份浓缩馥芮白 - 博客园](https://www.cnblogs.com/Flat-White/p/18090651)
 
 ### 多行tab
