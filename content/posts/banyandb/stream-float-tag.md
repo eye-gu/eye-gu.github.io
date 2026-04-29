@@ -17,7 +17,7 @@ weight: 0
 tags:
   -
 categories:
-  -
+  - banyandb
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRelated: false
