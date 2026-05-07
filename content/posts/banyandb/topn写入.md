@@ -42,20 +42,6 @@ repost:
 
 
 
-## 查询测试
-
-```shell
-# standalone模式
-go test -a ./test/integration/standalone/query... -v --ginkgo.focus="TopN Tests"
-go test -a ./test/integration/standalone/multi_segments... -v --ginkgo.focus="TopN Tests"
-
-# distributed模式
-go test -a ./test/integration/distributed/query... -v --ginkgo.focus="TopN Tests"
-go test -a ./test/integration/distributed/multi_segments... -v --ginkgo.focus="TopN Tests"
-```
-
-
-
 ## 数据分布
 
 ```go

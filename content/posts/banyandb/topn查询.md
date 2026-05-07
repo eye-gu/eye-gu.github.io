@@ -42,6 +42,17 @@ repost:
 
 
 
+## 查询测试
+
+```shell
+# standalone模式
+go test -count=1 ./test/integration/standalone/query/... ./test/integration/standalone/multi_segments/...
+
+go test -count=1 ./test/integration/distributed/query/... ./test/integration/distributed/multi_segments/...
+```
+
+
+
 ## TopN查询分析
 
 数据来源不是原始 measure，而是 topnAggregation 写入的数据，主要涉及滚动时间桶、桶内去重裁剪等，详见 [topn写入]({{< relref "posts/banyandb/topn写入.md" >}})。
@@ -103,7 +114,7 @@ if err != nil {
 
 ## 方案一：datanode 不截断
 
-**代码分支：`fix-10277-interface`**
+**代码分支：`fix-10277-interface` commit: 2ddd5033**
 
 就个人第一反应而言, standalone 是正确的查询逻辑，正确处理了 topn 写入阶段所有数据的聚合查询。distribute 模式存在两个截断问题：
 
