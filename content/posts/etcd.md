@@ -1,3 +1,4 @@
+
 ---
 title: Etcd
 subtitle:
@@ -49,7 +50,7 @@ docker run -d \
   --name etcd-server \
   -p 2379:2379 \
   -v /Users/guzemin/docker/etcd:/etcd-data \
-  quay.io/coreos/etcd:v3.6.8 \
+  quay.io/coreos/etcd:v3.5.25 \
   /usr/local/bin/etcd \
   --name s1 \
   --data-dir /etcd-data \
