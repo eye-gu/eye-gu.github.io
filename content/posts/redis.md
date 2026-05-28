@@ -41,10 +41,10 @@ repost:
 ---
 
 ```shell
-podman run -d --name redis \
-		-e ALLOW_EMPTY_PASSWORD=yes \
-    -v /Users/guzemin/docker/redis:/bitnami/redis/data:U \
+docker run -d --name redis \
+    -v /Users/guzemin/docker/redis/data:/data \
     -p 6379:6379 \
-		bitnami/redis:8.0.3
+    -p 8001:8001 \
+    redis/redis-stack:7.4.0-v8
 ```
 
