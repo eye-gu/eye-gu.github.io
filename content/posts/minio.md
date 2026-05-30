@@ -41,15 +41,13 @@ repost:
 ```shell
 docker run -d --name minio \
     -e TZ=Asia/Shanghai \
-    -e MINIO_ROOT_USER=root \
-    -e MINIO_ROOT_PASSWORD=minio123456 \
-    -v /Users/guzemin/docker/minio/data:/bitnami/minio/data \
+    -e MINIO_ROOT_USER=minioadmin \
+    -e MINIO_ROOT_PASSWORD=minioadmin \
+    -v /Users/guzemin/docker/minio/data:/data \
     --publish 9000:9000 \
     --publish 9001:9001 \
-    --restart=on-failure:5 \
-    --cpus=0.5 \
-    -m 1G \
-    bitnami/minio:2024.5.7
+    minio/minio:RELEASE.2024-12-18T13-15-44Z \
+    server /data --console-address ":9001"
 ```
 
 ```shell
