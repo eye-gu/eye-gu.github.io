@@ -1,0 +1,56 @@
+// ==============================
+// Custom style
+// 自定义样式
+// ==============================
+
+// Fix TOC hierarchical numbering to match body heading numbering
+// Body uses heading.number.format: h3 = "{h2}.{h3} {title}", producing e.g. "1.2 RAG 路由"
+// TOC uses nested <ol> which shows flat numbering: "2. RAG 路由"
+// This CSS counter fix makes TOC match the body's hierarchical format
+.toc .toc-content #TableOfContents > ol {
+  counter-reset: toc-h2;
+
+  > li {
+    counter-increment: toc-h2;
+    counter-reset: toc-h3;
+
+    &::marker {
+      content: counter(toc-h2) ". ";
+    }
+
+    > ol > li {
+      counter-increment: toc-h3;
+      counter-reset: toc-h4;
+
+      &::marker {
+        content: counter(toc-h2) "." counter(toc-h3) " ";
+      }
+
+      > ol > li {
+        counter-increment: toc-h4;
+        counter-reset: toc-h5;
+
+        &::marker {
+          content: counter(toc-h2) "." counter(toc-h3) "." counter(toc-h4) " ";
+        }
+
+        > ol > li {
+          counter-increment: toc-h5;
+          counter-reset: toc-h6;
+
+          &::marker {
+            content: counter(toc-h2) "." counter(toc-h3) "." counter(toc-h4) "." counter(toc-h5) " ";
+          }
+
+          > ol > li {
+            counter-increment: toc-h6;
+
+            &::marker {
+              content: counter(toc-h2) "." counter(toc-h3) "." counter(toc-h4) "." counter(toc-h5) "." counter(toc-h6) " ";
+            }
+          }
+        }
+      }
+    }
+  }
+}
