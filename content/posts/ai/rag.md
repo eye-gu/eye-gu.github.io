@@ -215,3 +215,88 @@ LLM 路由决策 → datasource: ["js_docs", "js_docs"]
 用户查询: "Python 最新版本的改进"
 → 先按 category=python 过滤，再执行语义检索
 ```
+
+### RAG 评估
+
+> 来源：[A Practical Guide to RAG Pipeline Evaluation (Part 1: Retrieval)](https://medium.com/relari/a-practical-guide-to-rag-pipeline-evaluation-part-1-27a472b09893) — Yi Zhang & Pasquale Antonante, Relari.ai
+
+**核心观点**：盲目试技术、凭直觉调参不如建立稳健的评估管道。系统性评估可以加速开发周期，仅凭肉眼观察不应是唯一的评估策略。
+
+#### 检索评估指标
+
+**排名无关指标**（Rank-agnostic Metrics）：
+
+- **Precision（精确率）** — 检索到的上下文中有多少比例是相关的，衡量信噪比
+- **Recall（召回率）** — 所有相关上下文中有多少被检索到，衡量完整性
+- **F1** — 精确率和召回率的调和平均值
+
+> **Recall 是检索的北极星指标**。只有当检索系统确信检索到的上下文足够完整时，才能保证回答的质量。
+
+**排名相关指标**（Rank-aware Metrics）：
+
+- **MRR（Mean Reciprocal Rank）** — 衡量第一个相关块的平均出现位置，适用于单个块即可回答的场景
+- **MAP（Mean Average Precision）** — 捕获所有检索到的相关块并计算加权分数，适用于需要综合多块信息的场景
+- **NDCG（Normalized Discounted Cumulative Gain）** — 考虑相关性分类为非二进制的情况，需要更细粒度加权时使用
+
+#### LLM 作为评估器
+
+在 HotpotQA 数据集上的实验结论：
+
+- GPT-4 对上下文相关性的二元分类准确率仅 **79%**，所有模型倾向过于保守（高精确率、低召回率）
+- 多块评估时误分类会累积，**Context Precision/AP 不够可靠**
+- GPT-4 的 Context Coverage 在预测 Context Recall 方面准确率 **>80%**，但不能完全替代 Recall —— LLM 评估器无法感知检索上下文之外遗漏了什么
+
+**结论**：LLM 代理指标适合方向性洞察，但不适合精确评估。人工标注的 ground truth 数据集仍然是最可靠的方法。
+
+#### 三条可操作建议
+
+**1. 先追 Recall，再优化 Precision**
+
+如果检索不到正确信息，高精确率也无法将质量提升到生产级别。应根据用例设置 Recall 阈值，越过阈值后再关注 Precision。Precision 仅在 LLM 无法从噪声中分离信号时才成为瓶颈，提高 Precision 可以降低成本和延迟。
+
+```
+管道 A: Recall=85%, Precision=60%  ← 先确保 Recall 足够高
+管道 B: Recall=75%, Precision=80%
+管道 C: Recall=50%, Precision=90%  ← 高 Precision 但 Recall 不足，无法生产使用
+```
+
+**2. 用 @K 选择检索多少块**
+
+Recall 和 Precision 之间存在权衡。检索语料库中的所有内容，Recall 保证 100%，但 Precision 极低。通过查看前 K 个检索块的 Precision@K / Recall@K，可以找到合适的 K 值。
+
+```
+K=1:  Recall=30%, Precision=95%
+K=3:  Recall=65%, Precision=80%
+K=5:  Recall=82%, Precision=60%  ← 如果目标是 Recall>80%，K=5 即可
+K=10: Recall=85%, Precision=35%  ← 继续增大 K 收益递减
+```
+
+**3. 用排名相关指标指导重排策略**
+
+当 Recall 阈值需要极大的 K 才能达到时，引入重排器：先用简单余弦相似度粗检索大量块（如 100 个），再用重排器（如 Cohere Reranker）缩小到少量块（如 5 个）。
+
+- **MRR** — 单个块通常包含回答所需的所有信息
+- **MAP** — RAG 旨在综合多个块
+- **NDCG** — 相关性分类为非二进制，需要更细粒度加权
+
+> 注：呈现给 LLM 的块顺序可能很重要，"Lost in the Middle"论文表明 LLM 对长提示的不同部分关注程度不同。
+
+### 重排序（Rerank）
+
+Rerank 的核心思路是 **"Retrieve then Rerank"（检索-重排）两阶段架构**：
+
+**第一阶段用 Bi-Encoder 做粗召回**：Query 和 Document 分别独立编码为向量，通过余弦相似度快速从大规模语料中检索出 Top-K 候选。速度快（文档向量可预计算），但精度有限 —— 编码时 Query 和 Document 没有任何交互，只在最后的向量空间做比较，损失了细粒度语义匹配能力。
+
+**第二阶段用 Cross-Encoder 做精排**：将 Query 和每个候选 Document 拼接后联合输入 Transformer，通过交叉注意力（Cross-Attention）做深层语义交互，为每个文档计算精确的相关性分数，按分数重排序。精度远高于 Bi-Encoder，但需要逐对计算，只适合对少量候选（几十到几百个）做精排。
+
+```
+Query + Doc_1 → Cross-Encoder → score_1
+Query + Doc_2 → Cross-Encoder → score_2
+...
+→ 按 score 重排序 → 返回最相关的 Top-N
+```
+
+**为什么需要两阶段**：Cross-Encoder 的计算复杂度是 O(Q × D)，对全量文档逐一配对代价不可接受。Bi-Encoder 可预计算所有文档向量，检索是毫秒级。所以用 Bi-Encoder 先缩小候选集（O(D) → O(K)），再用 Cross-Encoder 精排（O(K)），兼顾效率与精度。
+
+**常用 Rerank 模型**：Cohere Rerank（API 服务，开箱即用）、BGE-Reranker（开源，中文效果优秀）、bce-reranker（开源）等，原理均为 Cross-Encoder。
+
