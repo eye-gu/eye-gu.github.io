@@ -36,7 +36,6 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-<!--more-->
 
 ```shell
 docker run -d --name minio \
