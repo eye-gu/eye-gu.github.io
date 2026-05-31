@@ -50,6 +50,20 @@ podman run -d --name mysql \
     bitnami/mysql:8.2.0
 ```
 
+### vector
+
+> MySQL 社区版仅支持 VECTOR 类型存储，DISTANCE 函数和向量索引仅限 HeatWave/MySQL AI。
+> MariaDB 11.7+ 原生支持向量索引（HNSW）和距离函数。
+
+```shell
+docker run -d --name mariadb \
+    -e MARIADB_ROOT_PASSWORD=12345678 \
+    -e TZ=Asia/Shanghai \
+    -v /Users/guzemin/docker/mariadb/data:/var/lib/mysql:Z \
+    -p 3306:3306 \
+    docker.m.daocloud.io/mariadb:11.8
+```
+
 ## 导入导出
 
 ```shell

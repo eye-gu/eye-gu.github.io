@@ -46,7 +46,7 @@ docker run -d --name minio \
     -v /Users/guzemin/docker/minio/data:/data \
     --publish 9000:9000 \
     --publish 9001:9001 \
-    minio/minio:RELEASE.2024-12-18T13-15-44Z \
+    docker.m.daocloud.io/minio/minio:RELEASE.2024-12-18T13-15-44Z \
     server /data --console-address ":9001"
 ```
 

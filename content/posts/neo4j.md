@@ -45,7 +45,6 @@ repost:
 ```shell
 docker run -d --name neo4j \
 		-e NEO4J_AUTH=neo4j/12345678 \
-    -e NEO4J_AUTH=neo4j/12345678 \
     -e NEO4J_apoc_export_file_enabled=true \
     -e NEO4J_apoc_import_file_enabled=true \
     -e NEO4J_apoc_import_file_use__neo4j__config=true \
@@ -53,6 +52,6 @@ docker run -d --name neo4j \
     -v /Users/guzemin/docker/neo4j/data:/data \
     -p 7474:7474 \
     -p 7687:7687 \
-    neo4j:2026.03.1
+    docker.m.daocloud.io/neo4j:2026.03.1
 ```
 

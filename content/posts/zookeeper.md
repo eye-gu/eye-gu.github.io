@@ -41,10 +41,10 @@ repost:
 ---
 
 ```shell
-podman run -d --name zookeeper \
-		-v /Users/guzemin/docker/zookeeper/data:/bitnami/zookeeper:U \
+docker run -d --name zookeeper \
+		-v /Users/guzemin/docker/zookeeper/data:/data \
 		-p 2181:2181 \
-		-e ALLOW_ANONYMOUS_LOGIN=yes \
-    bitnami/zookeeper:3.9.3
+		-e ZOO_4LW_COMMANDS_WHITELIST="*" \
+    docker.m.daocloud.io/zookeeper:3.9.3
 ```
 

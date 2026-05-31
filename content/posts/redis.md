@@ -45,6 +45,6 @@ docker run -d --name redis \
     -v /Users/guzemin/docker/redis/data:/data \
     -p 6379:6379 \
     -p 8001:8001 \
-    redis/redis-stack:7.4.0-v8
+    docker.m.daocloud.io/redis/redis-stack:7.4.0-v8
 ```
 
