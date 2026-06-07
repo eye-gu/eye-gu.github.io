@@ -321,7 +321,7 @@ enableEmoji = true
   # site keywords
   keywords = []
   # site default theme ["light", "dark", "auto"]
-  defaultTheme = "light"
+  defaultTheme = "auto"
   # which hash function used for SRI, when empty, no SRI is used
   # ["sha256", "sha384", "sha512", "md5"]
   fingerprint = ""
@@ -1189,7 +1189,7 @@ enableEmoji = true
         inputPosition = "bottom" # ["top", "bottom"]
         lang = "zh-CN"
         lightTheme = "light"
-        darkTheme = "light"
+        darkTheme = "dark"
         lazyLoad = true
     # Third-party library config
     [params.page.library]
