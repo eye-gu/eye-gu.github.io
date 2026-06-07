@@ -1188,8 +1188,8 @@ enableEmoji = true
         emitMetadata = "0"
         inputPosition = "bottom" # ["top", "bottom"]
         lang = "zh-CN"
-        lightTheme = "light"
-        darkTheme = "dark"
+        lightTheme = "preferred_color_scheme"
+        darkTheme = "preferred_color_scheme"
         lazyLoad = true
     # Third-party library config
     [params.page.library]
