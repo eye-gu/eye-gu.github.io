@@ -18,9 +18,9 @@ license:
 comment: false
 weight: 0
 tags:
-  - Flink
+  -
 categories:
-  - 大数据
+  -
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRelated: false

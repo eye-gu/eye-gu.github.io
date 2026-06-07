@@ -18,8 +18,8 @@ baseURL = "https://eye-gu.github.io/"
 theme = ["FixIt"] # enable in your site config file
 # determines default content language ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "zh-cn"
-# language code ["en", "zh-CN", "fr", "pl", ...]
-languageCode = "zh-CN"
+# locale ["en", "zh-CN", "fr", "pl", ...]
+locale = "zh-CN"
 # language name ["English", "简体中文", "Français", "Polski", ...]
 languageName = "English"
 # whether to include Chinese/Japanese/Korean
@@ -135,7 +135,7 @@ enableEmoji = true
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.134.1"
+    min = "0.153.0"
 
 # -------------------------------------------------------------------------------------
 # Markup related configuration in Hugo
@@ -208,7 +208,7 @@ enableEmoji = true
 
 [Permalinks]
   # posts = ":year/:month/:filename"
-  posts = "posts/:slugorfilename"
+  posts = "posts/:slugorcontentbasename"
 
 # -------------------------------------------------------------------------------------
 # Privacy Configuration
