@@ -42,51 +42,54 @@ enableEmoji = true
 
 [menu]
   [[menu.main]]
-    identifier = "archives"
+    identifier = "posts"
     parent = ""
-    # you can add extra information before the name (HTML format is supported), such as icons
-    pre = ""
-    # you can add extra information after the name (HTML format is supported), such as icons
-    post = ""
-    name = "Archives"
+    name = "文章"
     url = "/archives/"
-    # title will be shown when you hover on this menu link
-    title = ""
     weight = 1
-    # FixIt 0.2.14 | NEW add user-defined content to menu items
     [menu.main.params]
-      # add css class to a specific menu item
-      class = ""
-      # whether set as a draft menu item whose function is similar to a draft post/page
-      draft = false
-      # FixIt 0.2.16 | NEW add fontawesome icon to a specific menu item
-      icon = "fa-solid fa-archive"
-      # FixIt 0.2.16 | NEW set menu item type, optional values: ["mobile", "desktop"]
-      type = ""
-      # FixIt 0.3.9 | NEW whether to show the submenu item divider line
-      divided = false
+      icon = "fa-solid fa-feather"
   [[menu.main]]
     identifier = "categories"
-    parent = ""
-    pre = ""
-    post = ""
-    name = "Categories"
+    parent = "posts"
+    name = "分类"
     url = "/categories/"
-    title = ""
-    weight = 2
+    weight = 1
     [menu.main.params]
       icon = "fa-solid fa-folder-tree"
   [[menu.main]]
     identifier = "tags"
-    parent = ""
-    pre = ""
-    post = ""
-    name = "Tags"
+    parent = "posts"
+    name = "标签"
     url = "/tags/"
-    title = ""
-    weight = 3
+    weight = 2
     [menu.main.params]
       icon = "fa-solid fa-tags"
+  [[menu.main]]
+    identifier = "guestbook"
+    parent = ""
+    name = "留言"
+    url = "/guestbook/"
+    weight = 3
+    [menu.main.params]
+      icon = "fa-solid fa-comment-dots"
+  [[menu.main]]
+    identifier = "rss"
+    parent = ""
+    name = "RSS"
+    url = "/index.xml"
+    weight = 4
+    [menu.main.params]
+      icon = "fa-solid fa-rss"
+      type = "desktop"
+  [[menu.main]]
+    identifier = "about"
+    parent = ""
+    name = "关于"
+    url = "/about/"
+    weight = 100
+    [menu.main.params]
+      icon = "fa-solid fa-quote-left"
 
 # -------------------------------------------------------------------------------------
 # Related content Configuration
@@ -425,7 +428,7 @@ enableEmoji = true
       # URL of the LOGO
       logo = ""
       # title name
-      name = ""
+      name = "eye-gu"
       # you can add extra information before the name (HTML format is supported), such as icons
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
@@ -442,7 +445,7 @@ enableEmoji = true
   # FixIt 0.2.18 | NEW Breadcrumb config
   [params.breadcrumb]
     enable = true
-    sticky = false
+    sticky = true
     showHome = false
     # FixIt 0.3.13 | NEW
     separator = "/"
@@ -533,7 +536,7 @@ enableEmoji = true
 
   # FixIt 0.2.17 | NEW TagCloud config for tags page
   [params.tagcloud]
-    enable = false
+    enable = true
     min = 14 # Minimum font size in px
     max = 32 # Maximum font size in px
     peakCount = 10 # Maximum count of posts per tag
@@ -543,7 +546,7 @@ enableEmoji = true
   [params.home]
     # Home page profile
     [params.home.profile]
-      enable = false
+      enable = true
       # Gravatar Email for preferred avatar in home page
       gravatarEmail = ""
       # URL of avatar shown in home page
@@ -551,9 +554,9 @@ enableEmoji = true
       # FixIt 0.2.17 | NEW identifier of avatar menu link
       avatarMenu = ""
       # title shown in home page (HTML format is supported)
-      title = ""
+      title = "eye-gu"
       # subtitle shown in home page (HTML format is supported)
-      subtitle = ""
+      subtitle = "Think, Write, Share."
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
@@ -568,7 +571,7 @@ enableEmoji = true
 
   # FixIt 0.2.16 | CHANGED Social config about the author
   [params.social]
-    GitHub = ""
+    GitHub = "eye-gu"
     Linkedin = ""
     Twitter = ""
     Instagram = ""
@@ -785,8 +788,8 @@ enableEmoji = true
 
   # FixIt 0.2.14 | NEW GitHub banner in the top-right or top-left corner
   [params.githubCorner]
-    enable = false
-    permalink = "https://github.com/hugo-fixit/FixIt"
+    enable = true
+    permalink = "https://github.com/eye-gu/eye-gu.github.io"
     title = "View source on GitHub"
     position = "right" # ["left", "right"]
 
@@ -802,31 +805,31 @@ enableEmoji = true
   [params.backToTop]
     enable = true
     # Scroll percent label in b2t button
-    scrollpercent = false
+    scrollpercent = true
 
   # FixIt 0.2.16 | NEW Reading progress bar
   [params.readingProgress]
-    enable = false
+    enable = true
     # Available values: ["left", "right"]
     start = "left"
     # Available values: ["top", "bottom"]
     position = "top"
     reversed = false
-    light = ""
-    dark = ""
+    light = "#8581dd"
+    dark = "#fff"
     height = "2px"
   
   # FixIt 0.2.17 | NEW Progress bar in the top during page loading.
   # For more information: https://github.com/CodeByZach/pace
   [params.pace]
-    enable = false
+    enable = true
     # All available colors:
     # ["black", "blue", "green", "orange", "pink", "purple", "red", "silver", "white", "yellow"]
     color = "blue"
     # All available themes:
     # ["barber-shop", "big-counter", "bounce", "center-atom", "center-circle", "center-radar", "center-simple",
     # "corner-indicator", "fill-left", "flash", "flat-top", "loading-bar", "mac-osx", "material", "minimal"]
-    theme = "minimal"
+    theme = "loading-bar"
   
   # FixIt 0.3.10 | NEW Global Feed config for RSS, Atom and JSON feed.
   [params.feed]
@@ -844,7 +847,7 @@ enableEmoji = true
   # Depends on open custom blocks https://fixit.lruihao.cn/references/blocks/
   [params.customPartials]
     head = []
-    profile = []
+    profile = ["custom/profile-ghchart.html"]
     aside = []
     comment = []
     footer = []
@@ -896,7 +899,7 @@ enableEmoji = true
     # FixIt 0.3.0 | NEW whether to show link to report issue for the post
     linkToReport = true
     # FixIt 0.3.10 | CHANGED Page style ["narrow", "normal", "wide", ...]
-    pageStyle = "normal"
+    pageStyle = "wide"
     # FixIt 0.2.17 | CHANGED Auto Bookmark Support
     # If true, save the reading progress when closing the page.
     autoBookmark = false
@@ -1048,7 +1051,7 @@ enableEmoji = true
       Mix = false
     # FixIt 0.2.15 | CHANGED Comment config
     [params.page.comment]
-      enable = false
+      enable = true
       # FixIt 0.2.13 | NEW Artalk comment config (https://artalk.js.org/)
       [params.page.comment.artalk]
         enable = false
@@ -1172,19 +1175,19 @@ enableEmoji = true
         katex = false
       # FixIt 0.2.14 | NEW Giscus comments config
       [params.page.comment.giscus]
-        enable = false
-        repo = ""
-        repoId = ""
-        category = ""
-        categoryId = ""
-        mapping = ""
+        enable = true
+        repo = "eye-gu/eye-gu.github.io"
+        repoId = "R_kgDONHa31w"
+        category = "Announcements"
+        categoryId = "DIC_kwDONHa3184C-rfR"
+        mapping = "pathname"
         origin = "https://giscus.app" # FixIt NEW | 0.3.7 Or set it to your self-hosted domain
         strict = "0" # FixIt NEW | 0.2.18
         term = ""
         reactionsEnabled = "1"
         emitMetadata = "0"
         inputPosition = "bottom" # ["top", "bottom"]
-        lang = ""
+        lang = "zh-CN"
         lightTheme = "light"
         darkTheme = "dark"
         lazyLoad = true

@@ -1,0 +1,44 @@
+// ==============================
+// Override theme SCSS variables
+// 覆盖主题变量（配色方案参照 lruihao.cn 紫色系）
+// ==============================
+
+:root {
+  // Fluid typography
+  --c-font-base: clamp(0.96875rem, 0.85rem + 0.2vw, 1rem);
+  --c-font-xs: calc(0.75 * var(--c-font-base));
+  --c-font-s: calc(0.875 * var(--c-font-base));
+  --c-font-m: var(--c-font-base);
+  --c-font-l: calc(1.125 * var(--c-font-base));
+  --c-font-xl: calc(1.25 * var(--c-font-base));
+  --c-font-xxl: calc(1.5 * var(--c-font-base));
+
+  // Spacing
+  --c-space-1: 0.25rem;
+  --c-space-2: calc(var(--c-space-1) * 2);
+  --c-space-4: calc(var(--c-space-1) * 4);
+  --c-space-8: calc(var(--c-space-1) * 8);
+
+  // Card
+  --c-card-bg: #fefefe;
+  --c-card-border: #e5e7eb;
+  --c-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  // Header
+  --c-header-bg: rgba(255, 255, 255, 0.72);
+  --c-header-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  // Link (purple accent matching lruihao.cn)
+  --c-link: #6a64d5;
+  --c-link-hover: #8581dd;
+}
+
+[data-theme="dark"] {
+  --c-card-bg: #35373c;
+  --c-card-border: #46494f;
+  --c-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --c-header-bg: rgba(46, 47, 51, 0.8);
+  --c-header-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --c-link: #8581dd;
+  --c-link-hover: #a5a1ef;
+}
