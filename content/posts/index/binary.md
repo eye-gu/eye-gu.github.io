@@ -20,7 +20,6 @@ keywords:
   - 分子指纹
   - 相似度搜索
 license:
-comment: false
 weight: 0
 tags:
   -

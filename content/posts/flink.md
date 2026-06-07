@@ -15,7 +15,6 @@ keywords:
   - savepoint
   - checkpoint
 license:
-comment: false
 weight: 0
 tags:
   -
