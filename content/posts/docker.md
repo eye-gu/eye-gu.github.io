@@ -71,4 +71,45 @@ docker run --name nacos \
 -e NACOS_AUTH_IDENTITY_KEY=serverIdentity \
 -e NACOS_AUTH_IDENTITY_VALUE=SecretKey012345678901234567890123456789012345678901234567890123456789 \
 -p 8848:8848 -p 9848:9848 -d docker.m.daocloud.io/nacos/nacos-server:v2.5.0
+
+
+docker run -d --name zookeeper \
+		-v /Users/guzemin/docker/zookeeper/data:/data \
+		-p 2181:2181 \
+		-e ZOO_4LW_COMMANDS_WHITELIST="*" \
+    docker.m.daocloud.io/zookeeper:3.9.3
+
+
+docker run -d --name redis \
+    -v /Users/guzemin/docker/redis/data:/data \
+    -p 6379:6379 \
+    -p 8001:8001 \
+    docker.m.daocloud.io/redis/redis-stack:7.4.0-v8
+
+
+docker run -d --name postgresql \
+    -e POSTGRES_PASSWORD=123456 \
+    -e TZ=Asia/Shanghai \
+    -v /Users/guzemin/docker/postgres/data:/var/lib/postgresql/data \
+    -p 5432:5432 \
+    pgvector/pgvector:0.8.2-pg17-trixie
+
+
+docker run -d --name neo4j \
+		-e NEO4J_AUTH=neo4j/12345678 \
+    -e NEO4J_apoc_export_file_enabled=true \
+    -e NEO4J_apoc_import_file_enabled=true \
+    -e NEO4J_apoc_import_file_use__neo4j__config=true \
+    -e NEO4JLABS_PLUGINS='["apoc"]' \
+    -v /Users/guzemin/docker/neo4j/data:/data \
+    -p 7474:7474 \
+    -p 7687:7687 \
+    docker.m.daocloud.io/neo4j:2026.03.1
+
+
+docker run -d \
+  --name=filebeat \
+  --volume="/home/sorcara/merlin/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro" \
+  --volume="/home/sorcara/logs/reptileProduct/error.log:/usr/share/filebeat/data/reptileProduct/error.log:ro" \
+  docker.elastic.co/beats/filebeat:8.15.0
 ```
