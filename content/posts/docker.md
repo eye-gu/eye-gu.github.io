@@ -1,8 +1,8 @@
 ---
-title: Nacos
+title: Docker
 subtitle:
-date: 2024-11-27T14:34:04+08:00
-slug: c29d3a8
+date: 2026-06-13T23:09:22+08:00
+slug: c41c58c
 draft: false
 author:
   name:
@@ -13,6 +13,10 @@ description:
 keywords:
 license:
 weight: 0
+tags:
+  -
+categories:
+  -
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRelated: false
@@ -36,9 +40,25 @@ repost:
 ---
 
 
-
 ```shell
-docker run --name nacos \
+docker run -d \
+  --name gitea \
+  -p 3000:3000 \
+  -p 2222:22 \
+  docker.m.daocloud.io/gitea/gitea:1.26-rootless
+
+
+
+docker run -d \
+  --name gitlab \
+  -p 8929:80 \
+  -p 2289:22 \
+  --shm-size=256m \
+  --privileged=true \
+  docker.m.daocloud.io/gitlab/gitlab-ce:19.0.2-ce.0
+
+
+docker run --name nacos3 \
 -e MODE=standalone \
 -e NACOS_AUTH_TOKEN=U2VjcmV0S2V5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNA== \
 -e NACOS_AUTH_IDENTITY_KEY=serverIdentity \
@@ -52,4 +72,3 @@ docker run --name nacos \
 -e NACOS_AUTH_IDENTITY_VALUE=SecretKey012345678901234567890123456789012345678901234567890123456789 \
 -p 8848:8848 -p 9848:9848 -d docker.m.daocloud.io/nacos/nacos-server:v2.5.0
 ```
-
