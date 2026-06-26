@@ -13,6 +13,8 @@ description:
 keywords:
 license:
 weight: 0
+categories:
+  - search
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRelated: false

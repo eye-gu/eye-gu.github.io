@@ -16,7 +16,7 @@ weight: 0
 tags:
   -
 categories:
-  -
+  - tools
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRelated: false

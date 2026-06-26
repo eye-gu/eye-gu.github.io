@@ -16,7 +16,7 @@ weight: 0
 tags:
   -
 categories:
-  -
+  - database
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRelated: false

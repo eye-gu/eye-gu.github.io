@@ -19,7 +19,7 @@ weight: 0
 tags:
   -
 categories:
-  -
+  - bigdata
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRelated: false
