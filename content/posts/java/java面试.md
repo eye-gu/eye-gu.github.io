@@ -86,8 +86,6 @@ repost:
 
 ### 4. GC 判活算法
 
-> Gc:引用计数,可达性分析
-
 **答**：判断对象存活有两种方法。引用计数实现简单但无法解决循环引用;JVM 主流用可达性分析——从 GC Roots 出发遍历对象图,不可达即可回收。
 
 **深入**：GC Roots 包括:虚拟机栈中引用的对象、方法区的静态属性/常量引用、本地方法栈 JNI 引用、被 synchronized 锁持有的对象、JVM 内部引用(如基本类型的 Class)。
@@ -102,9 +100,9 @@ repost:
 
 ### 6. GC 收集器谱系
 
-> serial, serialOld, ParNew, parallScanvenge(Parallel Scavenge), ParallOld, cms, g1, zgc
+> serial, serialOld, ParNew, Parallel Scavenge, ParallOld, cms, g1, zgc
 
-**答**：按代与并行程度:Serial / Serial Old 单线程;ParNew 多线程新生代;Parallel Scavenge / Parallel Old 吞吐量优先;CMS 低停顿;G1 可预测停顿;ZGC 用着色指针实现亚毫秒级停顿。
+**答**：按代与并行程度:Serial / Serial Old 单线程;ParNew 多线程新生代;Parallel Scavenge / Parallel Old 吞吐量优先;CMS 低停顿;G1 可预测停顿;ZGC 用染色指针实现亚毫秒级停顿。G1和zgc在并发标记阶段都用三色标记
 
 **深入**：新生代(Serial/ParNew/Parallel Scavenge)用复制算法,老年代(Serial Old/Parallel Old/CMS)用标记-整理或标记-清除;G1/ZGC 不再按物理分代,整堆 Region 化。
 
@@ -170,7 +168,7 @@ fullgc兜底
 
 > io:同步阻塞,同步非阻塞,nio,信号驱动io,异步io
 
-**答**：五种 IO 模型:阻塞 IO、非阻塞 IO(忙轮询)、IO 多路复用(select/poll/epoll,一个线程监听多个 fd)、信号驱动 IO、异步 IO(内核完成数据拷贝后回调)。Java NIO 基于多路复用(Selector + Channel + Buffer),前四种本质都是同步(数据拷贝阶段仍阻塞)。
+**答**：五种 IO 模型:同步阻塞 IO、同步非阻塞 IO(忙轮询)、IO 多路复用(select/poll/epoll,一个线程监听多个 fd)、信号驱动 IO、异步 IO(内核完成数据拷贝后回调)。Java NIO 基于多路复用(Selector + Channel + Buffer),前四种本质都是同步(数据拷贝阶段仍阻塞)。
 
 **深入**：
 
@@ -193,8 +191,6 @@ fullgc兜底
 - 线程不安全:JDK7 并发扩容头插法成环导致死循环;JDK8 尾插法解决死环但仍可能数据覆盖丢失,并发场景应使用 ConcurrentHashMap。
 
 ### 2. ConcurrentHashMap
-
-> 没有node时cas,扩容时协助处理,synchronized锁node
 
 **答**：JDK8 的 ConcurrentHashMap 用 CAS + synchronized:桶为空用 CAS 插入;非空 synchronized 只锁桶头节点(粒度细);扩容时其他线程通过 transfer 协助分段迁移。
 
