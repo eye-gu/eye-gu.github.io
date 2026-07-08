@@ -100,9 +100,9 @@ show schemas;
 ./bin/spark-sql \
 --conf spark.sql.catalog.mysql=org.apache.spark.sql.execution.datasources.v2.jdbc.JDBCTableCatalog \
 --conf spark.sql.catalog.mysql.driver=com.mysql.cj.jdbc.Driver \
---conf spark.sql.catalog.mysql.url=jdbc:mysql://192.168.10.17:3306 \
---conf spark.sql.catalog.mysql.user=sorcara \
---conf spark.sql.catalog.mysql.password=sorcara
+--conf spark.sql.catalog.mysql.url=jdbc:mysql://127.0.0.1:3306 \
+--conf spark.sql.catalog.mysql.user=root \
+--conf spark.sql.catalog.mysql.password=12345678
 ```
 
 ## es

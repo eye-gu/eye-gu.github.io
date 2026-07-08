@@ -42,13 +42,12 @@ repost:
 ## docker
 
 ```shell
-podman run -d --name mysql \
-    -e MYSQL_ROOT_PASSWORD=12345678 \
-    -e TZ=Asia/Shanghai \
-    -v /Users/guzemin/docker/mysql/data:/bitnami/mysql/data:U \
-    -v /Users/guzemin/docker/mysql/my.cnf:/opt/bitnami/mysql/conf/my.cnf \
-    -p 3306:3306 \
-    bitnami/mysql:8.2.0
+docker run -d --name mysql \
+  -e MYSQL_ROOT_PASSWORD=12345678 \
+  -e TZ=Asia/Shanghai \
+  -v /Users/guzemin/docker/mysql/data:/var/lib/mysql \
+  -p 3306:3306 \
+  mysql:8.4
 ```
 
 ### vector
