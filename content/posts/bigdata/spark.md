@@ -175,20 +175,83 @@ select * from product limit 10;
 ## iceberg
 
 ```shell
-./bin/spark-shell --master 'local[2]' \
+spark-sql \
   --conf spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions \
   --conf spark.sql.catalog.local=org.apache.iceberg.spark.SparkCatalog \
   --conf spark.sql.catalog.local.type=hadoop \
-  --conf spark.sql.catalog.local.warehouse=/tmp/warehouse
+  --conf spark.sql.catalog.local.warehouse=/Users/guzemin/spark/iceberg \
   --packages org.apache.iceberg:iceberg-spark-runtime-4.1_2.13:1.11.0
 
 
-./bin/spark-sql --packages org.apache.iceberg:iceberg-spark-runtime-4.1_2.13:1.11.0\
+spark-sql --packages org.apache.iceberg:iceberg-spark-runtime-4.1_2.13:1.11.0\
     --conf spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions \
     --conf spark.sql.catalog.spark_catalog=org.apache.iceberg.spark.SparkSessionCatalog \
     --conf spark.sql.catalog.spark_catalog.type=hive \
     --conf spark.sql.catalog.local=org.apache.iceberg.spark.SparkCatalog \
     --conf spark.sql.catalog.local.type=hadoop \
-    --conf spark.sql.catalog.local.warehouse=$PWD/warehouse \
+    --conf spark.sql.catalog.local.warehouse=/Users/guzemin/spark/iceberg \
     --conf spark.sql.defaultCatalog=local
+```
+
+## paimon
+
+```shell
+spark-sql \
+    --conf spark.sql.catalog.paimon=org.apache.paimon.spark.SparkCatalog \
+    --conf spark.sql.catalog.paimon.warehouse=file:/Users/guzemin/spark/paimon \
+    --conf spark.sql.extensions=org.apache.paimon.spark.extensions.PaimonSparkSessionExtensions
+
+
+spark-sql \
+    --conf spark.sql.catalog.paimon=org.apache.paimon.spark.SparkCatalog \
+    --conf spark.sql.catalog.paimon.warehouse=hdfs:///user/paimon/warehouse \
+    --conf spark.sql.extensions=org.apache.paimon.spark.extensions.PaimonSparkSessionExtensions
+```
+
+
+```shell
+spark-sql \
+    --conf spark.sql.extensions=org.apache.paimon.spark.extensions.PaimonSparkSessionExtensions \
+    --conf spark.sql.catalog.paimon_rest=org.apache.paimon.spark.SparkCatalog \
+    --conf spark.sql.catalog.paimon_rest.metastore=rest \
+    --conf spark.sql.catalog.paimon_rest.uri=http://localhost:56744/ \
+    --conf spark.sql.catalog.paimon_rest.token.provider=bear \
+    --conf spark.sql.catalog.paimon_rest.token=init_token \
+    --conf spark.sql.catalog.paimon_rest.warehouse=file:/Users/guzemin/spark/paimon-warehouse
+
+spark-sql \
+    --conf spark.sql.extensions=org.apache.paimon.spark.extensions.PaimonSparkSessionExtensions \
+    --conf spark.sql.catalog.paimon_jdbc=org.apache.paimon.spark.SparkCatalog \
+    --conf spark.sql.catalog.paimon_jdbc.metastore=jdbc \
+    --conf spark.sql.catalog.paimon_jdbc.uri=jdbc:mysql://127.0.0.1:3306/paimon \
+    --conf spark.sql.catalog.paimon_jdbc.jdbc.user=root \
+    --conf spark.sql.catalog.paimon_jdbc.jdbc.password=12345678 \
+    --conf spark.sql.catalog.paimon_jdbc.catalog-key=jdbc \
+    --conf spark.sql.catalog.paimon_jdbc.warehouse=file:/Users/guzemin/spark/paimon-warehouse
+
+spark-sql \
+    --conf spark.sql.extensions=org.apache.paimon.spark.extensions.PaimonSparkSessionExtensions \
+    --conf spark.sql.catalog.paimon_hive=org.apache.paimon.spark.SparkCatalog \
+    --conf spark.sql.catalog.paimon_hive.metastore=hive \
+    --conf spark.sql.catalog.paimon_hive.uri=thrift://localhost:9083 \
+    --conf spark.sql.catalog.paimon_hive.warehouse=/user/paimon/warehouse \
+    --conf spark.sql.catalog.paimon_hive.hive-conf-dir=$HIVE_HOME/conf
+```
+
+
+```sql
+use paimon_rest;
+create database if not exists spark;
+use spark;
+
+CREATE TABLE app1_logs
+TBLPROPERTIES (
+  'type' = 'object-table',
+  'path' = 'file:/Users/guzemin/spark/paimon'           -- 可选：不指定则用默认 warehouse 路径
+);
+
+CREATE TABLE app2_logs
+TBLPROPERTIES (
+  'type' = 'object-table'         -- 可选：不指定则用默认 warehouse 路径
+);
 ```

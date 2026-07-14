@@ -154,6 +154,8 @@ Savepoint 支持两种格式：**标准格式（Canonical）** 将状态重新�
 ## SQL Client
 
 ```shell
+sql-client.sh
+
 # 启动 SQL Client（嵌入式模式）
 ./bin/sql-client.sh embedded
 
@@ -311,4 +313,54 @@ source.addSink(JdbcSink.sink(
 ));
 
 env.execute("Flink MySQL Sink");
+```
+
+## paimon
+
+```shell
+CREATE CATALOG paimon_rest WITH (
+  'type' = 'paimon',
+  'metastore' = 'rest',
+  'uri' = 'http://localhost:57558/',
+  'token' = 'init_token',
+  'warehouse' = 'file:/Users/guzemin/flink/paimon-warehouse',
+  'token.provider' = 'bear'
+);
+
+
+CREATE CATALOG paimon_jdbc WITH (
+  'type' = 'paimon',
+  'metastore' = 'jdbc',
+  'uri' = 'jdbc:mysql://127.0.0.1:3306/paimon',
+  'jdbc.user' = 'root',
+  'jdbc.password' = '12345678',
+  'warehouse' = 'file:/Users/guzemin/flink/paimon-warehouse'
+);
+
+
+CREATE CATALOG paimon_hive WITH (
+  'type' = 'paimon',
+  'metastore' = 'hive',
+  'uri' = 'thrift://localhost:9083',
+  'warehouse' = '/user/paimon/warehouse'
+);
+
+
+
+USE CATALOG paimon_rest;
+CREATE DATABASE IF NOT EXISTS flink;
+USE flink;
+
+CREATE TABLE app1_logs (
+  placeholder STRING
+) WITH (
+  'type' = 'object-table',
+  'path' = 'file:/Users/guzemin/flink/paimon'
+);
+
+CREATE TABLE app2_logs (
+  placeholder STRING
+) WITH (
+  'type' = 'object-table'
+);
 ```

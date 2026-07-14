@@ -133,7 +133,7 @@ export PATH=$HIVE_HOME/bin:$PATH
   <!-- 元数据库：MySQL（嵌入式 metastore，跑在 HS2 进程内，无 9083） -->
   <property>
     <name>javax.jdo.option.ConnectionURL</name>
-    <value>jdbc:mysql://localhost:3306/metastore?createDatabaseIfNotExist=true&amp;useSSL=false&amp;characterEncoding=UTF-8</value>
+    <value>jdbc:mysql://localhost:3306/metastore?createDatabaseIfNotExist=true&amp;useSSL=false&amp;characterEncoding=UTF-8&amp;allowPublicKeyRetrieval=true</value>
   </property>
   <property>
     <name>javax.jdo.option.ConnectionDriverName</name>
