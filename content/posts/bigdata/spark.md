@@ -195,21 +195,20 @@ spark-sql --packages org.apache.iceberg:iceberg-spark-runtime-4.1_2.13:1.11.0\
 
 ## paimon
 
+
 ```shell
 spark-sql \
+    --conf spark.sql.extensions=org.apache.paimon.spark.extensions.PaimonSparkSessionExtensions \
     --conf spark.sql.catalog.paimon=org.apache.paimon.spark.SparkCatalog \
-    --conf spark.sql.catalog.paimon.warehouse=file:/Users/guzemin/spark/paimon \
-    --conf spark.sql.extensions=org.apache.paimon.spark.extensions.PaimonSparkSessionExtensions
-
+    --conf spark.sql.catalog.paimon.metastore=filesystem \
+    --conf spark.sql.catalog.paimon.warehouse=file:/Users/guzemin/spark/paimon
 
 spark-sql \
     --conf spark.sql.catalog.paimon=org.apache.paimon.spark.SparkCatalog \
     --conf spark.sql.catalog.paimon.warehouse=hdfs:///user/paimon/warehouse \
     --conf spark.sql.extensions=org.apache.paimon.spark.extensions.PaimonSparkSessionExtensions
-```
 
 
-```shell
 spark-sql \
     --conf spark.sql.extensions=org.apache.paimon.spark.extensions.PaimonSparkSessionExtensions \
     --conf spark.sql.catalog.paimon_rest=org.apache.paimon.spark.SparkCatalog \

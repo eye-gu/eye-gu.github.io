@@ -317,7 +317,7 @@ env.execute("Flink MySQL Sink");
 
 ## paimon
 
-```shell
+```sql
 CREATE CATALOG paimon_rest WITH (
   'type' = 'paimon',
   'metastore' = 'rest',
