@@ -42,14 +42,14 @@ repost:
 
 
 ```shell
-podman network create --subnet=172.20.0.0/16 ob-net
+docker network create --subnet=172.20.0.0/16 ob-net
 
-podman run -p 2881:2881 \
+docker run -p 2881:2881 \
   --name obstandalone \
   --net ob-net --ip 172.20.0.10 \
   -e MODE=MINI \
   -e OB_TENANT_PASSWORD=12345678 \
-  -d quay.io/oceanbase/oceanbase-ce:4.3.5-lts
+  -d quay.io/oceanbase/oceanbase-ce:4.4.2-lts
 ```
 
 ## navicat连接
