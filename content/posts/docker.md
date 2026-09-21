@@ -111,4 +111,14 @@ docker run -d \
   --volume="/home/sorcara/merlin/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro" \
   --volume="/home/sorcara/logs/reptileProduct/error.log:/usr/share/filebeat/data/reptileProduct/error.log:ro" \
   docker.elastic.co/beats/filebeat:8.15.0
+
+
+docker run -d --name sqlserver-test \
+  -e "ACCEPT_EULA=Y" \
+  -e "MSSQL_SA_PASSWORD=Cdc#Test2026" \
+  -p 14330:1433 \
+  mcr.microsoft.com/mssql/server:2019-latest
+# 开启agent
+docker exec -u root sqlserver-test /opt/mssql/bin/mssql-conf set sqlagent.enabled true
+docker restart sqlserver-test
 ```
