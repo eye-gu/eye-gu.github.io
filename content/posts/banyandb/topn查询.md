@@ -156,12 +156,32 @@ scan 数据量不变，磁盘 IO、内存 GC、反序列化 CPU、网络 IO 都�
 
 Issue: https://github.com/apache/skywalking/issues/13837
 
-前两种方案社区维护者均未同意，最终决定的 datanode 查询语义为：
+```yaml
+name: "service_instance_float_metric_top_bottom_3"
+groups: ["entity"]
+topN: 3
+fieldValueSort: 1
+agg: 5
+```
+
+这是一个topn的配置, topN是limit, groups是聚合, agg是聚合函数, fieldValueSort是排序. 我第一反应, 整体的语义应该是:
+
+```sql
+SELECT entity, agg(value) AS val
+FROM data
+GROUP BY entity
+ORDER BY val DESC
+LIMIT 3
+```
+
+结果并不是, 因为skywalking oap中会做聚合再写入topn, 导致对skywalking来说,这个语义不满足整体的需求, 所以前两种方案社区维护者均未同意，最终决定的 datanode 查询语义为,每组只取1个,每个datanode返回前n组：
 
 ```sql
 SELECT entity, MAX(value) as val FROM data GROUP BY entity ORDER BY val DESC LIMIT N
 ```
 
-从原来的全局 topn 排序，改成 entity 去重后的全局 topn 排序。这个逻辑存在问题，例如 COUNT 聚合时 liaison 结果一定为 1。但维护者坚持认同此方案。
+然后liaison节点还是对datanode返回的数据进行聚合
+
+从原来的全局 topn 排序，改成 entity 去重后的全局 topn 排序。感觉这个逻辑存在问题，例如 COUNT 聚合时 liaison 结果一定为 1。但维护者坚持认同此方案。
 
 所以 standalone 也需要进行逻辑修改, 保持两者查询逻辑相同.
