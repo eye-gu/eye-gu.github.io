@@ -43,11 +43,11 @@ repost:
 
 在公司代码中看到如下代码
 
-![img](/okhttp-20250801/p1.png)
+![img](p1.png)
 
 可以看到, 在方法内部初始化okhttpclient, 而且原本是共享的, 是特地改成如此.
 
-![img](/okhttp-20250801/p2.png)
+![img](p2.png)
 
 查看okhttpclient的注释, 标明了应该是共享对象.如果不按照这个注释, 不是共享对象, 会有什么问题呢?
 
@@ -100,9 +100,9 @@ private static CompletableFuture<String> request(OkHttpClient client, Request re
 }
 ```
 
-![img](/okhttp-20250801/p3.png)
+![img](p3.png)
 
-![img](/okhttp-20250801/p4.png)
+![img](p4.png)
 
 测试对百度进行200次请求, 同样是异步模式
 
@@ -146,7 +146,7 @@ public static void main(String[] args) throws Exception {
 }
 ```
 
-![img](/okhttp-20250801/p4.png)
+![img](p4.png)
 
 可以看到只创建了几个线程, 但是耗时却来到了14382毫秒!
 
@@ -399,4 +399,4 @@ WebClient 明显优于 OkHttp，特别是在 1000+ 并发时
 
 之前通过javaagent, 还有skywalking插件这两种形式, 做过dubbo,grpc等服务的路由灰度(泳道)等功能. 类似的, 可以在`DefaultWebClientBuilder`构造webclient对象时, 自动添加一个`ExchangeFilterFunction`实现, filter方法中可以拿到request和一些context信息, 做一些路由策略
 
-![img](/okhttp-20250801/p5.png)
+![img](p5.png)

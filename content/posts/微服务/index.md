@@ -48,7 +48,7 @@ repost:
 微服务的概念是相较于单体应用而来的, 在解释什么是微服务和为什么需要微服务时, 就首先需要了解什么是单体应用, 以及单体应用遇到的问题.
 ## 单体应用
 所有功能模块部署在一个单独的应用中, 编译成一个非常大的包启动. 单个节点承载不了压力的时候, 也可以部署多节点, 需在前面部署一个负载均衡器
-![](/微服务/单体.png)
+![](单体.png)
 
 缺点
 - 开发效率低：所有的开发在一个项目改代码，递交代码相互等待，代码冲突不断
@@ -61,7 +61,7 @@ repost:
 
 ## 微服务
 以技术或者业务等标准对各个功能模块拆分. 各个服务单独部署和发布, 可以按需扩容, 服务之间通过网络通信
-![](/微服务/微服务.png)
+![](微服务.png)
 
 拆分标准
 
@@ -93,11 +93,11 @@ repost:
 3. limit 10000,10: 分布式数据库多节点排序, 如果是req-resp模型, 那么就需要把每个节点的前10010行缓存到主节点进行整体的一个排序, 流式模型或许可能每个节点都只传输前几千行就可以得到结果. 一些分库分表中间件就会做这样的优化.
 
 ### dubbo
-![](/微服务/dubbo.png)
+![](dubbo.png)
 dubbo框架是一个开箱即用的高性能rpc框架, 目前主要分为dubbo2和dubbo3两个大版本. dubbo3为了适应云原生, 服务发现修改成了应用级, 主推通信协议从dubbo修改为了Triple, Triple协议可以认为是在grpc的协议上添加了一些header, 由此也可以看到grpc的一个扩展能力.
 
 #### dubbo2协议
-![](/微服务/dubbo2.png)
+![](dubbo2.png)
 
 关于协议细节可以查看官方文档:上图是使用wireshark对json序列化时抓的包, 可以看到上下文信息是放在最后面的, 如果想使用servicemesh的路由功能, 那么就必须解析整个包, 这也是dubbo2不适用于云原生的一个原因.
 
@@ -212,8 +212,8 @@ kubectl get rs --n=default
 
 #### deployment
 为Pod和ReplicaSet提供了一个声明式定义(declarative)方法, 通常不会直接创建pod和rs, 而是通过deployment来配置. 简单来说就是对应微服务中的一个服务. 无状态应用.
-![](/微服务/deployment.png)
-![](/微服务/deployment2.png)
+![](deployment.png)
+![](deployment2.png)
 
 ```yaml
 apiVersion: apps/v1
@@ -355,8 +355,8 @@ cr - Client Receive 客户端收到结果
 
 #### Zipkin
 对dubbo是通过filter实现的, 对代码和配置有侵入. 默认是内存数据库, 也可以配置mysql, es等
-![](/微服务/zipkin.png)
-![](/微服务/zipkin2.png)
+![](zipkin.png)
+![](zipkin2.png)
 
 #### pinpoint
 使用javaagent, 对代码无侵入. UI相较于zipkin更丰富, 有更详细的span信息, 已支持dubbo插件, 有类信息, 对常用数据库甚至可以查看sql语句, 和redis命令. 在trace之外还支持了metrics
@@ -370,10 +370,10 @@ Pinpoint Web: web界面
 
 Pinpoint Agent: java启动时需配置
 
-![](/微服务/pinpoint.png)
-![](/微服务/pinpoint2.png)
-![](/微服务/pinpoint3.png)
-![](/微服务/pinpoint4.png)
+![](pinpoint.png)
+![](pinpoint2.png)
+![](pinpoint3.png)
+![](pinpoint4.png)
 
 #### skywalking
 支持多种agent, 包括java, python, rust, nodejs
@@ -386,13 +386,13 @@ Pinpoint Agent: java启动时需配置
 
 组件和pinpoint结构上差不多: 探针, 存储, oap, 具体可以查看社区的中文文档:skywalking
 
-![](/微服务/skywalking.png)
-![](/微服务/skywalking2.png)
-![](/微服务/skywalking3.png)
-![](/微服务/skywalking4.png)
-![](/微服务/skywalking5.png)
-![](/微服务/skywalking6.png)
-![](/微服务/skywalking7.png)
+![](skywalking.png)
+![](skywalking2.png)
+![](skywalking3.png)
+![](skywalking4.png)
+![](skywalking5.png)
+![](skywalking6.png)
+![](skywalking7.png)
 
 ### 日志平台 logging
 #### filebeat
@@ -402,11 +402,11 @@ filebeat是单独的一个进程, 是一个轻量级的日志收集工具, 无�
 
 #### elk
 kibana其实非常强大, 不光是对index数据的管理查看, 还可以用来做报表画布地图, 也有apm和metrics功能
-![](/微服务/elk.png)
+![](elk.png)
 
 ### 指标监控 metrics
 #### prometheus
-![](/微服务/prometheus.png)
+![](prometheus.png)
 
 prometheus是一个使用go编写的时序数据库, 通过配置定时的通过http接口获取metrics.
 指标类型:
@@ -420,10 +420,10 @@ histogram: 直方图, 落在每个指标区间的数量
 summary: 
 
 #### grafana
-![](/微服务/grafana.png)
+![](grafana.png)
 
 #### arthas
-![](/微服务/arthas.png)
+![](arthas.png)
 
 arthas是针对java的一个诊断工具, 可以监控函数入参出参, 反编译热更新代码, 对一些测试环境难以复现, 日志中也并没有打印的线上bug, 可以通过该工具进行排查, 当然attach之后是会对性能造成一定影响的, 特别是会失去jit编译优化热点代码. 其原理也是javaagent和jvmti. 通过Arthas Tunnel服务, 可以不用直接登陆服务器进行attach操作, 直接在该服务的页面可以远程attach.
 
@@ -440,8 +440,8 @@ arthas是针对java的一个诊断工具, 可以监控函数入参出参, 反编
 ### mvcc
 读不加锁，读写不冲突。在读多写少的OLTP应用中，读写不冲突是非常重要的，极大的增加了系统的并发性能. mvcc只在读已提交和可重复读下工作, 这里介绍innodb的实现机制
 
-![](/微服务/mvcc.png)
-![](/微服务/mvcc2.png)
+![](mvcc.png)
+![](mvcc2.png)
 
 在查询时会开启一个read view,把当前未提交的事务id构成一个数组缓存起来,然后通过主键id找到要查询的数据行的最新的事务id.
 1. 如果要查询的数据行的事务id小于read view中最小的事务id,说明该行数据事务在查询前已提交,可被查看
@@ -456,7 +456,7 @@ innodb中(默认repeatable read级别)，事务在begin/start transaction之后�
 
 ### acid/cap/base
 #### 2pc/xa
-![](/微服务/2pc.png)
+![](2pc.png)
 
 准备阶段（Prepare phase）：事务管理器给每个参与者发送 Prepare 消息，每个数据库参与者在本地执行事务，并写本地的 Undo/Redo 日志，此时事务没有提交。（Undo 日志是记录修改前的数据，用于数据库回滚，Redo 日志是记录修改后的数据，用于提交事务后写入数据文件）
 
@@ -498,7 +498,7 @@ try, Confirm和cancel接口必须保证幂等.
 
 ### seata
 #### at
-![](/微服务/at.png)
+![](at.png)
 
 这是seata提出的一个新的分布式事务解决方案, 简单理解可以认为就是xa, 是seata托管的xa. 因为是xa所以数据库必须有事务保证, 另一个新的限制是必须是jdbc
 
@@ -511,7 +511,7 @@ at模式需要在所有参数者本地数据库中增加一张undo_log表, 用�
 这个模式的并发性能, 显然高于2pc, 但小于tcc, 但是又不像tcc需要接口和数据库上的修改. 在性能影响上一个是获取全局锁的交互, 一个是备份的几次数据库交互. 主要问题是因为回滚时需要保证数据一致, 那就必须要将所有的改动都托管给at
 
 #### saga
-![](/微服务/saga.png)
+![](saga.png)
 
 像2pc, tcc等模式, 都是所有节点状态同步推进, 直至到最终状态, saga不是, 它是每个节点依次推进状态. saga是长事务的一个解决方案, 事务正常提交后继续执行下个事务, 出现异常回滚时, 按照逆向一个个回滚, 回滚类似tcc需要提供相应接口. 它的状态机非常复杂, 我也不是很了解
 

@@ -73,7 +73,7 @@ plt.show()
 
 
 
-![png](/ml/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_files/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_2_1.png)
+![png](1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_files/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_2_1.png)
     
 
 
@@ -99,7 +99,7 @@ plt.show()
 
 
 ​    
-![png](/ml/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_files/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_4_0.png)
+![png](1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_files/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_4_0.png)
 ​    
 
 
@@ -199,7 +199,7 @@ plt.show()
 
 
 
-![png](/ml/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_files/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_13_1.png)
+![png](1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_files/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_13_1.png)
     
 
 
@@ -344,7 +344,7 @@ plt.show()
 
 
 ​    
-![png](/ml/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_files/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_26_0.png)
+![png](1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_files/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_26_0.png)
 ​    
 
 
@@ -417,7 +417,7 @@ plt.show()
 
 
 ​    
-![png](/ml/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_files/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_36_0.png)
+![png](1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_files/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_36_0.png)
 ​    
 
 
@@ -440,5 +440,5 @@ plt.show()
 ```
 
 
-![png](/ml/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_files/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_37_0.png)
+![png](1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_files/1.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92_37_0.png)
     

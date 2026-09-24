@@ -198,7 +198,7 @@ plt.show()
 
 
 ​    
-![png](/ml/4.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_files/4.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_8_0.png)
+![png](4.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_files/4.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_8_0.png)
 ​    
 
 
@@ -238,7 +238,7 @@ plt.show()
 
 
 ​    
-![png](/ml/4.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_files/4.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_12_0.png)
+![png](4.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_files/4.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_12_0.png)
 ​    
 
 

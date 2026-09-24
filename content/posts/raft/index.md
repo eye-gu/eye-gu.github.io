@@ -46,7 +46,7 @@ https://zhuanlan.zhihu.com/p/142035411
 
 节点的状态机如下
 
-![](/raft.png)
+![](raft.png)
 
 候选者,领导者,追随者
 

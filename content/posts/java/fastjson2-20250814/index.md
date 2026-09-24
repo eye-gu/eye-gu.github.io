@@ -45,9 +45,9 @@ repost:
 
 有个线上报错, 查看日志后, 找到以下异常堆栈
 
-![](/fastjson2/stack.png)
+![](stack.png)
 
-![](/fastjson2/code.png)
+![](code.png)
 
 对照着代码, 发现是fastjson2序列化的报错, 后面找到一个issue: https://github.com/alibaba/fastjson2/issues/1720, 就升级了fastjson2的版本, 重新发了后, 经测试验证没有问题.
 
@@ -57,11 +57,11 @@ repost:
 
 一开始自己写了一个对象, 进行序列化测试. 尝试了半天, 怎么都无法复现, debug一下, 发现连fastjson2报错的代码那个方法都没进去. 再详细看堆栈信息, 其中有两行对应于报错的类, 应该是asm生成的代码. 无奈只能查看fastjson2的源码
 
-![](/fastjson2-20250814/stack2.png)
+![](stack2.png)
 
 找到了`JSONCompiledAnnotationProcessor#genWriteFieldName`方法:
 
-![](/fastjson2-20250814/genWriteFieldName.png)
+![](genWriteFieldName.png)
 
 根据属性名称的长度, 生成对应的代码. 因此, 只有在属性长度为8个字符的时候, 才会调用该方法, 那没办法, 索性使用一模一样的对象进行复现.
 
@@ -84,13 +84,13 @@ public static void main(String[] args) {
 }
 ```
 
-![](/fastjson2-20250814/stack3.png)
+![](stack3.png)
 
 ## 分析
 
 最后查看代码分析原因`com.alibaba.fastjson2.JSONWriterUTF16#writeName8Raw`(2.0.48版本):
 
-![](/fastjson2-20250814/writeName8Raw.png)
+![](writeName8Raw.png)
 
 在扩容的时候, 判断当前加10+indent是否够, 不够进行扩容
 
@@ -100,7 +100,7 @@ public static void main(String[] args) {
 
 最后查看最新版本的代码(2.0.58):
 
-![](/fastjson2-20250814/writeName8Raw2.png)
+![](writeName8Raw2.png)
 
 保证了最起码有13个字节.
 

@@ -78,7 +78,7 @@ plt.show()
 
 
 ​    
-![png](/ml/7.%E5%86%B3%E7%AD%96%E6%A0%91_files/7.%E5%86%B3%E7%AD%96%E6%A0%91_4_0.png)
+![png](7.%E5%86%B3%E7%AD%96%E6%A0%91_files/7.%E5%86%B3%E7%AD%96%E6%A0%91_4_0.png)
 ​    
 
 

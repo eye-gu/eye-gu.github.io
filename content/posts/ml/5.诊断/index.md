@@ -130,7 +130,7 @@ plt.show()
 
 
 ​    
-![png](/ml/5.%E8%AF%8A%E6%96%AD_files/5.%E8%AF%8A%E6%96%AD_3_0.png)
+![png](5.%E8%AF%8A%E6%96%AD_files/5.%E8%AF%8A%E6%96%AD_3_0.png)
 ​    
 
 
@@ -177,7 +177,7 @@ layer1 = Dense(15, activation='relu', kernel_regularizer = L2(0.01))
 
 ## 数据倾斜
 
-![](/ml/5.诊断_files/精准率召回率.png)
+![](5.诊断_files/精准率召回率.png)
 
 准确率: 预测和实际相同的数量 / 总数量. (15+70)/100 但在数据倾斜的情况下, 准确率并不能很好反应算法性能.
 

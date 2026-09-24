@@ -118,4 +118,4 @@ protected void doClose() {
 
 还有一次是`org.apache.dubbo.remoting.transport.netty4.NettyConnectionClient#initBootstrap`, 利用的是netty的closeFuture机制, 在初始化Channel的时候配置的. 两者并发调用的时候就会出现该异常
 
-![](/dubbo-20250819/image.png)
+![](image.png)

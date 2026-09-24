@@ -118,7 +118,7 @@ org.apache.dubbo.rpc.protocol.rest.exception.CodeStyleNotSupportException: servi
 
 ## **调用方代码分析**
 
-![img](/dubbo-20250818/image.png)
+![img](image.png)
 
 在堆栈代码处打断点后发现, 有一个usercenter的url在用rest协议引用UserFacade接口, 但是rest协议只支持jax-rs, spring-webmvc注解, 可是UserFacade并没有这些注解, 因为它是用tri协议暴露的.
 
@@ -126,7 +126,7 @@ org.apache.dubbo.rpc.protocol.rest.exception.CodeStyleNotSupportException: servi
 
 问题来到了为什么会有这个url
 
-![img](/dubbo-20250818/image1.png)
+![img](image1.png)
 
 发现在`org.apache.dubbo.registry.client.event.listener.ServiceInstancesChangedListener#serviceUrls`中有*就会添加这个url
 
@@ -134,13 +134,13 @@ org.apache.dubbo.rpc.protocol.rest.exception.CodeStyleNotSupportException: servi
 
 
 
-![img](/dubbo-20250818/image2.png)
+![img](image2.png)
 
 继续debug, 在`org.apache.dubbo.registry.client.event.listener.ServiceInstancesChangedListener#refreshInstance`中被添加进来
 
 
 
-![img](/dubbo-20250818/image3.png)
+![img](image3.png)
 
 在`org.apache.dubbo.registry.client.ServiceDiscoveryRegistry#subscribeURLs`中订阅的服务有usercenter和usercenter-dubbo
 
@@ -150,15 +150,15 @@ org.apache.dubbo.rpc.protocol.rest.exception.CodeStyleNotSupportException: servi
 
 最后看到在`org.apache.dubbo.metadata.store.nacos.NacosMetadataReport#getServiceAppMapping(java.lang.String, org.apache.dubbo.metadata.MappingListener, org.apache.dubbo.common.URL)`看到
 
-![img](/dubbo-20250818/image4.png)
+![img](image4.png)
 
 
 
 对照这nacos的配置文件, 确实UserFacade映射了两个应用, 但其实只有usercenter-dubbo才是真的dubbo的服务, usercenter是springcloud的服务. 至于UserFacade为什么会映射dubbo, 可能是之前注册上去的吧
 
-![img](/dubbo-20250818/image5.png)
+![img](image5.png)
 
-![img](/dubbo-20250818/image6.png)
+![img](image6.png)
 
 
 

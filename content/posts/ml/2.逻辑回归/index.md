@@ -72,7 +72,7 @@ plt.show()
 
 
 ​    
-![png](/ml/2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_files/2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_3_0.png)
+![png](2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_files/2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_3_0.png)
 ​    
 
 
@@ -119,7 +119,7 @@ plt.show()
 
 
 ​    
-![png](/ml/2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_files/2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_7_0.png)
+![png](2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_files/2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_7_0.png)
 ​    
 
 
@@ -138,7 +138,7 @@ plt.show()
 
 
 ​    
-![png](/ml/2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_files/2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_8_0.png)
+![png](2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_files/2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_8_0.png)
 ​    
 
 
@@ -246,7 +246,7 @@ plt.show()
 
 
 
-![png](/ml/2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_files/2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_14_1.png)
+![png](2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_files/2.%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92_14_1.png)
     
 
 

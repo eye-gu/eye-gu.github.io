@@ -86,7 +86,7 @@ plt.plot(x,y)
 
 
 ​    
-![png](/dl/2.%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_files/2.%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_3_1.png)
+![png](2.%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_files/2.%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_3_1.png)
 ​    
 
 
@@ -121,7 +121,7 @@ plt.plot(x,np.zeros_like(x), color='red')
 
 
 ​    
-![png](/dl/2.%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_files/2.%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_6_1.png)
+![png](2.%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_files/2.%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C_6_1.png)
 ​    
 
 

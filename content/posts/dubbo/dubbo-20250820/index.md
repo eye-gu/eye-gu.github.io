@@ -110,6 +110,6 @@ public void onResponse(Result appResponse, Invoker<?> invoker, Invocation invoca
 
 发现在其他项目里, 提供方会自定义一个ExceptionFilter
 
-![](/dubbo-20250820/image1.png)
+![](image1.png)
 
-![](/dubbo-20250820/image2.png)
+![](image2.png)
