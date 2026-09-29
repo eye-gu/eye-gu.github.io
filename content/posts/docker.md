@@ -83,7 +83,7 @@ docker run -d --name zookeeper \
 docker run -d --name redis \
     -v /Users/guzemin/docker/redis/data:/data \
     -p 6379:6379 \
-    docker.m.daocloud.io/redis/redis-stack-server:7.4.0-v8
+    redis:8.10.2
 
 
 docker run -d --name postgresql \
