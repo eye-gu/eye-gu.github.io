@@ -43,6 +43,17 @@ repost:
 ./bin/spark-sql
 
 ./bin/spark-shell
+
+./sbin/start-all.sh
+
+./sbin/start-master.sh
+http://localhost:8080
+./sbin/start-worker.sh spark://guzemin.localdomain:7077
+
+./sbin/start-thriftserver.sh --master spark://guzemin.localdomain:7077
+http://localhost:4040/jobs/
+./bin/beeline -u jdbc:hive2://127.0.0.1:10000 -n guzemin
+!q
 ```
 
 
@@ -168,8 +179,6 @@ select * from product limit 10;
 --conf spark.es.port=9200
 
 ./bin/beeline -u jdbc:hive2://127.0.0.1:10000 -n guzemin
-
-:q
 ```
 
 ## iceberg
