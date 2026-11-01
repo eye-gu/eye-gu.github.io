@@ -109,11 +109,8 @@ export HADOOP_CLASSPATH=${TEZ_CONF_DIR}:${TEZ_JARS}/*:${TEZ_JARS}/lib/*:${HADOOP
 
 ### hive
 
-`.zprofile`
-
 ```shell
 export HIVE_HOME=/Users/guzemin/hive/apache-hive-4.2.0-bin
-export PATH=$HIVE_HOME/bin:$PATH
 ```
 
 `hive-site.xml`
@@ -148,10 +145,10 @@ export PATH=$HIVE_HOME/bin:$PATH
     <value>12345678</value>
   </property>
 
-  <property>
+  <!-- <property>
     <name>hive.metastore.uris</name>
     <value>thrift://localhost:9083</value>
-  </property>
+  </property> -->
 </configuration>
 ```
 
@@ -160,14 +157,14 @@ export PATH=$HIVE_HOME/bin:$PATH
 ## 命令
 
 ```shell
-schematool -dbType mysql -initSchema --verbose #第一次执行
+./bin/schematool -dbType mysql -initSchema --verbose #第一次执行
 ```
 
 ```shell
-hive --service metastore
+./bin/hive --service metastore
 
-hiveserver2 # Web UI：http://localhost:10002/
+./bin/hive --service hiveserver2 # Web UI：http://localhost:10002/
 
-beeline -u 'jdbc:hive2://localhost:10000/' -n $USER
+./bin/beeline -u 'jdbc:hive2://localhost:10000/' -n $USER
 ```
 

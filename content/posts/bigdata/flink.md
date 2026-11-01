@@ -154,7 +154,7 @@ Savepoint 支持两种格式：**标准格式（Canonical）** 将状态重新�
 ## SQL Client
 
 ```shell
-sql-client.sh
+./bin/sql-client.sh
 
 # 启动 SQL Client（嵌入式模式）
 ./bin/sql-client.sh embedded
@@ -317,7 +317,14 @@ env.execute("Flink MySQL Sink");
 
 ## paimon
 
+添加paimon-flink, paimon-hadoop-uber, paimon-flink-action jar
+
 ```sql
+CREATE CATALOG paimon WITH (
+    'type' = 'paimon',
+    'warehouse' = 'file:///Users/guzemin/flink/paimon-warehouse'
+);
+
 CREATE CATALOG paimon_rest WITH (
   'type' = 'paimon',
   'metastore' = 'rest',

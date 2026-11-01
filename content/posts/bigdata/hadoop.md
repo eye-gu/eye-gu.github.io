@@ -129,12 +129,10 @@ export JAVA_HOME=/Users/guzemin/.sdkman/candidates/java/21.0.11-zulu
 </configuration>
 ```
 
-`.zprofile`
 
 ```shell
 export HADOOP_HOME=/Users/guzemin/hadoop/hadoop-3.4.3
 export HADOOP_USER_NAME=guzemin
-export PATH=$HADOOP_HOME/bin:$PATH
 ```
 
 ## 命令
