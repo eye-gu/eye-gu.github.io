@@ -83,7 +83,8 @@ docker run -d --name zookeeper \
 docker run -d --name redis \
     -v /Users/guzemin/docker/redis/data:/data \
     -p 6379:6379 \
-    redis:8.10.2
+    redis:8.10.2 \
+    redis-server --requirepass 123456
 
 
 docker run -d --name postgresql \

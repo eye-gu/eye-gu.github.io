@@ -43,15 +43,17 @@ repost:
 
 ```shell
 docker run -d --name rabbitmq \
+    -h rabbitmq \
     -e TZ=Asia/Shanghai \
-    -e RABBITMQ_MANAGEMENT_ALLOW_WEB_ACCESS=true \
+    -e RABBITMQ_DEFAULT_USER=admin \
+    -e RABBITMQ_DEFAULT_PASS=123456 \
     -e RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS='-rabbitmq_stream advertised_host "127.0.0.1"' \
-    -v /Users/guzemin/docker/rabbitmq/mnesia:/bitnami/rabbitmq/mnesia \
-    -v /Users/guzemin/docker/rabbitmq/rabbitmq.conf:/opt/bitnami/rabbitmq/etc/rabbitmq/rabbitmq.conf \
+    -v /Users/guzemin/docker/rabbitmq/data:/var/lib/rabbitmq \
+    -v /Users/guzemin/docker/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf \
     -p 15672:15672 \
     -p 5672:5672 \
     -p 5552:5552 \
-    bitnami/rabbitmq:3.13.2
+    rabbitmq:3.13.2-management
 
 # 开启stream
 docker exec rabbitmq rabbitmq-plugins enable rabbitmq_stream

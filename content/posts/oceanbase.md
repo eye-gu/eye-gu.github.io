@@ -52,6 +52,8 @@ docker run -p 2881:2881 \
   -d quay.io/oceanbase/oceanbase-ce:4.4.2-lts
 ```
 
-## navicat连接
+## 连接
 
-密码为空
+root@sys 密码为空
+
+root@test，密码 12345678
