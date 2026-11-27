@@ -210,7 +210,7 @@ spark-sql \
     --conf spark.sql.extensions=org.apache.paimon.spark.extensions.PaimonSparkSessionExtensions \
     --conf spark.sql.catalog.paimon=org.apache.paimon.spark.SparkCatalog \
     --conf spark.sql.catalog.paimon.metastore=filesystem \
-    --conf spark.sql.catalog.paimon.warehouse=file:/Users/guzemin/spark/paimon
+    --conf spark.sql.catalog.paimon.warehouse=file:/Users/guzemin/spark/paimon-warehouse
 
 spark-sql \
     --conf spark.sql.catalog.paimon=org.apache.paimon.spark.SparkCatalog \
